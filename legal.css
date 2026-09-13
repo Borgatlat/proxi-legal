@@ -49,6 +49,11 @@ body {
 a { color: var(--green-mid); }
 a:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 2px; border-radius: 3px; }
 
+/* An email address is one unbreakable token wide enough to push the page
+   sideways on a narrow screen. Let long strings break instead. */
+body { overflow-wrap: break-word; }
+a { overflow-wrap: anywhere; }
+
 .back {
   display: inline-block;
   margin-bottom: 28px;
