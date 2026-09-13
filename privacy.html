@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProxI Privacy Policy</title>
+<link rel="canonical" href="https://borgatlat.github.io/Proxi/privacy.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Manrope:wght@500;700&display=swap">
+<link rel="stylesheet" href="legal.css">
+</head>
+<body>
+<main class="page">
+<a class="back" href="index.html">&larr; ProxI</a>
+<h1>ProxI Privacy Policy</h1>
+<p><strong>Last updated: August 24, 2026</strong></p>
+<p>This policy describes what ProxI (&quot;the App,&quot; &quot;we,&quot; &quot;us&quot;) actually collects, why, and who it's shared with. It is written to match the App's real, current behavior — not a generic template — so if the App's behavior changes (new features, new third-party services), this document must be updated before that change ships.</p>
+<p>ProxI is operated by <strong>BetterU LLC</strong> (&quot;we,&quot; &quot;us,&quot; &quot;our&quot;). If you have questions about this policy or your data, contact us at <strong>lucasborgarello@icloud.com</strong>.</p>
+<blockquote><strong>This is not legal advice.</strong> This policy was drafted to accurately reflect the App's technical data flows. Before you publish it or submit to the App Store, have it reviewed by a lawyer, particularly once you have users outside the United States, add payments, or add analytics/ad SDKs — any of which would require updates to this document.</blockquote>
+<h2>1. Who this applies to</h2>
+<p>ProxI is intended for users <strong>13 years of age and older</strong>. We do not knowingly collect personal information from children under 13. If you believe a child under 13 has created an account, contact us at the email above and we will delete it.</p>
+<h2>2. What we collect</h2>
+<h3>Account information</h3>
+<ul>
+  <li><strong>Email address</strong> — required to create an account, used for login and account-related communication (e.g., password reset, email confirmation). Collected and authenticated by our backend provider, Supabase (see Section 4).</li>
+  <li><strong>Password</strong> — never stored or seen by us in plain text. It is hashed and managed entirely by Supabase Auth.</li>
+  <li><strong>Sign in with Apple</strong> (if you use it) — Apple provides us a one-time identity token and, depending on your choice, your name and either your real email or an Apple-generated private relay email. We never see your Apple password.</li>
+</ul>
+<h3>Profile information (collected during onboarding, required to use the App)</h3>
+<ul>
+  <li><strong>Name</strong> and <strong>username</strong></li>
+  <li><strong>Traits and interests</strong> — selected from a preset list (e.g., &quot;Early riser,&quot; &quot;Running&quot;), shown to other members of your group</li>
+  <li><strong>A short goal description</strong> — free text describing something you're working on</li>
+  <li><strong>An optional &quot;what's getting in the way&quot; reflection</strong> — free text about difficulty making friends, sticking to goals, or social media. This field is optional and visible only to you, never to other members or shown anywhere in the App's group screens. Treat it as you would any personal journal entry: we store it like any other profile field, we do not analyze it, sell it, or use it for advertising, but you should still only share what you're comfortable having stored on our servers.</li>
+</ul>
+<h3>Content you create in the App</h3>
+<ul>
+  <li><strong>Daily proof posts</strong> — photos, videos, or notes you post to your accountability group, plus timestamps and whether a post landed on time or late</li>
+  <li><strong>Forfeit and dispute records</strong> — what you owe, dispute reasons you write, and your votes on other members' disputes. Votes are stored per member but are only ever readable by the member who cast them — the App and other members only ever see the aggregate count, never who voted which way</li>
+  <li><strong>Meetup RSVPs</strong> — which meetups you've said you're attending</li>
+  <li><strong>Streak and attendance counters</strong> derived automatically from the above</li>
+</ul>
+<h3>Photos, and your camera and photo library</h3>
+<p>When you attach a photo to a daily proof post, the App asks for permission to use your camera or your photo library. We only ever receive the single image you choose. We do <strong>not</strong> browse, scan, or upload anything else from your library, and permission can be declined — you can still post a note or mark a day done without a photo.</p>
+<p>Photos you post are uploaded to and stored by Supabase Storage (see Section 4). We keep the image itself, the group and account it belongs to, and the day it was posted for. We do not run face recognition, object recognition, or any other automated analysis on your photos, and we do not strip or read embedded camera metadata.</p>
+<p><strong>One thing worth being plain about:</strong> proof images are stored in a public storage bucket. The App only ever surfaces a photo's web address to members of that photo's group, and blocked members are excluded — but the address itself is not additionally password-protected, so anyone who obtained the exact address (for example, if a group member sent it to them) could open the image. Please treat proof photos as something you're comfortable sharing with your group, rather than as private storage.</p>
+<h3>What we do <strong>not</strong> collect</h3>
+<p>We want to be specific here rather than vague: as currently built, ProxI does <strong>not</strong> collect your location/GPS, does not access your contacts, does not use advertising identifiers or ad SDKs, does not use analytics or crash-tracking SDKs, and does not process payments (forfeits are informal social arrangements between friends — see the Terms of Service). If any of that changes, this section will be updated first.</p>
+<p>We also do not use AI to analyse you. The one place the App uses an AI service is rating how difficult a *public goal* is, from the goal's own text and nothing else (see Section 4). Nothing you write privately — proof notes, dispute reasons, your onboarding reflection — is ever sent to it, and it is never used to profile, score or rank people.</p>
+<h2>3. How we use what we collect</h2>
+<ul>
+  <li>To create and secure your account, and let you log back in</li>
+  <li>To operate the App's core features: showing your group's daily proof wall, tracking streaks, running forfeit disputes and votes, and meetup RSVPs</li>
+  <li>To communicate with you about your account (e.g., email confirmation)</li>
+  <li>We do <strong>not</strong> use your data to serve you ads, and we do not sell your personal information to anyone</li>
+</ul>
+<h2>4. Who your data is shared with</h2>
+<p>We share data with two third-party service providers, plus Apple as the App Store operator:</p>
+<ul>
+  <li><strong>Supabase, Inc.</strong> — our backend provider. Supabase hosts our database, handles authentication, and stores essentially all data described in Section 2 on our behalf, in the cloud region we selected when creating our project. This includes <strong>Supabase Storage</strong>, where the proof photos described in Section 2 are held. Supabase acts as our data processor: it stores the data under our direction and does not use it for its own purposes. See <a href="https://supabase.com/privacy" rel="noopener noreferrer" target="_blank">Supabase's privacy policy</a> for how they handle infrastructure-level data.</li>
+  <li><strong>OpenAI, L.L.C.</strong> — used for one narrow purpose: estimating how hard a public goal is, so it can be shown with a difficulty rating. When a goal is posted to the public feed, we send OpenAI <strong>only the goal's title, its short description, and its topic tags</strong> — the same text that is already public on the feed for every signed-in person to read. We ask it to research roughly how many people manage that goal, and we store the resulting rating on the goal.</li>
+</ul>
+<p>We do <strong>not</strong> send OpenAI your name, username, email, account identifier, photos, proof posts, group activity, friends, notes, or anything else in Section 2. The goal text is not linked to you when it is sent, so what OpenAI receives is a sentence like &quot;Swim the channel crossing&quot; with no indication of who wrote it. If a rating cannot be established with reasonable confidence, no rating is stored and the goal simply shows no difficulty. See <a href="https://openai.com/policies/privacy-policy/" rel="noopener noreferrer" target="_blank">OpenAI's privacy policy</a> and their <a href="https://openai.com/policies/api-data-usage-policies/" rel="noopener noreferrer" target="_blank">API data usage terms</a>, under which API inputs are not used to train their models.</p>
+<ul>
+  <li><strong>Apple Inc.</strong> — when you download the App through the App Store. Apple, per its own policies, may know that you use the App. We do not send Apple any of the information described in Section 2. See <a href="https://www.apple.com/legal/privacy/" rel="noopener noreferrer" target="_blank">Apple's privacy policy</a>.</li>
+</ul>
+<p>The App does not currently offer Sign in with Apple; accounts are created with an email address and password. If that changes, this section will be updated first.</p>
+<p>Members of your own accountability group see the profile and content information described in Section 2 that the App is designed to show them (your name, traits/interests, proof posts, dispute reasons, forfeit status) — that visibility is the core of how the App works, not a third-party disclosure, and it's scoped to your group by database-level access rules, not just the app's UI.</p>
+<p><strong>Friends</strong> are separate from your group, and see less. Someone you have accepted as a friend sees your name, username, avatar, how and when you became friends, your current streak number, and whether you have posted today — nothing else. They do <strong>not</strong> see your proof photos or videos, your proof notes, your traits, interests, goal description or reflection, which group you are in, or anything about your forfeits or disputes. Someone searching for you by username, before you are friends, sees only your name, username and avatar. This is enforced by database-level access rules, not by the app's UI.</p>
+<p>We do not share your data with data brokers, advertisers, or any other third party not listed above.</p>
+<h2>5. Data retention and deletion</h2>
+<p>We keep your data for as long as your account is active. Group history (who missed a day, dispute outcomes) is kept as a permanent record within your group by design — settling a forfeit clears the debt but does not erase that the day was missed, matching how the App is meant to work.</p>
+<p><strong>To delete your account</strong>, use Delete Account in the App's Profile screen. This is permanent and takes effect immediately. It removes:</p>
+<ul>
+  <li>your login, including your email address and password</li>
+  <li>your profile: name, username, traits, interests, and onboarding answers</li>
+  <li>every photo you posted as proof, deleted from storage</li>
+  <li>your proof history, streaks, group membership, meetup RSVPs, and any disputes you opened</li>
+  <li>your friends, any friend requests you had sent or received, and any unused in-person codes — your friends simply stop seeing you in their list, and are not told why</li>
+</ul>
+<p>The one thing that remains is forfeits your group had already recorded, kept as part of that group's shared history with your name detached from them, so the group's own record still makes sense for the people still in it. Those entries no longer identify you.</p>
+<p>If the in-app deletion fails for any reason, email us at <strong>lucasborgarello@icloud.com</strong> and we will delete the account for you.</p>
+<h2>6. Your rights</h2>
+<p>Depending on where you live, you may have rights to access, correct, or delete your personal information, or to receive a copy of it. To exercise any of these rights, contact us at <strong>lucasborgarello@icloud.com</strong>; we will respond within a reasonable time.</p>
+<h2>7. Security</h2>
+<p>We rely on Supabase's infrastructure security and row-level database permissions to keep your data scoped to you, your group, and the friends you have accepted — each seeing a different and deliberately limited set, as described in Section 4. No method of storage or transmission is 100% secure, and we can't guarantee absolute security.</p>
+<h2>8. Changes to this policy</h2>
+<p>If we change what we collect or who we share it with, we'll update this document and change the &quot;Last updated&quot; date above. Material changes (e.g., adding ad tracking or a new third-party processor) will be called out clearly, not buried in a version bump.</p>
+<h2>9. Contact</h2>
+<p><strong>BetterU LLC</strong> Texas, United States lucasborgarello@icloud.com</p>
+<p>We answer privacy requests at that address. If your jurisdiction requires a postal address for a privacy contact, email us and we will provide one.</p>
+<hr>
+<p>*Open item before this is submission-ready: have a lawyer review it. The account-deletion flow described in Section 5 is built and live in the app.*</p>
+<footer>
+ProxI is operated by BetterU LLC. Questions about either document:
+<a href="mailto:lucasborgarello@icloud.com">lucasborgarello@icloud.com</a>.
+</footer>
+</main>
+</body>
+</html>
