@@ -14,7 +14,7 @@
 <main class="page">
 <a class="back" href="index.html">&larr; ProxI</a>
 <h1>ProxI Privacy Policy</h1>
-<p><strong>Last updated: September 12, 2026</strong></p>
+<p><strong>Last updated: September 15, 2026</strong></p>
 <p>This policy describes what ProxI (&quot;the App,&quot; &quot;we,&quot; &quot;us&quot;) actually collects, why, and who it's shared with. It is written to match the App's real, current behavior, not a generic template, so if the App's behavior changes (new features, new third-party services), this document must be updated before that change ships.</p>
 <p>ProxI is operated by <strong>BetterU LLC</strong> (&quot;we,&quot; &quot;us,&quot; &quot;our&quot;). If you have questions about this policy or your data, contact us at <strong>lucasborgarello@icloud.com</strong>.</p>
 <h2>1. Who this applies to</h2>
@@ -24,66 +24,113 @@
 <ul>
   <li><strong>Email address</strong>: required to create an account, used for login and account-related communication (e.g., password reset, email confirmation). Collected and authenticated by our backend provider, Supabase (see Section 4).</li>
   <li><strong>Password</strong>: never stored or seen by us in plain text. It is hashed and managed entirely by Supabase Auth.</li>
-  <li><strong>Sign in with Apple</strong> (if you use it): Apple provides us a one-time identity token and, depending on your choice, your name and either your real email or an Apple-generated private relay email. We never see your Apple password.</li>
 </ul>
-<h3>Profile information (collected during onboarding, required to use the App)</h3>
+<h3>Profile information</h3>
 <ul>
   <li><strong>Name</strong> and <strong>username</strong></li>
-  <li><strong>Traits and interests</strong>: selected from a preset list (e.g., &quot;Early riser,&quot; &quot;Running&quot;), shown to other members of your group</li>
-  <li><strong>A short goal description</strong>: free text describing something you're working on</li>
-  <li><strong>An optional &quot;what's getting in the way&quot; reflection</strong>: free text about difficulty making friends, sticking to goals, or social media. This field is optional and visible only to you, never to other members or shown anywhere in the App's group screens. Treat it as you would any personal journal entry: we store it like any other profile field, we do not analyze it, sell it, or use it for advertising, but you should still only share what you're comfortable having stored on our servers.</li>
+  <li><strong>Traits and activities</strong>: selected from preset lists (e.g., &quot;Early riser,&quot; &quot;Running&quot;). Who sees them depends on your settings (see Section 4)</li>
+  <li><strong>A short goal description</strong>: free text describing something you're working on, collected during onboarding</li>
+  <li><strong>An optional &quot;what's getting in the way&quot; reflection</strong>: free text about difficulty making friends, sticking to goals, or social media. This field is optional and visible only to you, never to other members, friends, or anyone else. Treat it as you would any personal journal entry: we store it like any other profile field, we do not analyze it, sell it, or use it for advertising, but you should still only share what you're comfortable having stored on our servers.</li>
+  <li><strong>Profile settings</strong>: the colour you chose for your profile, and who each part of your profile is shared with (Friends, Only me, or Everyone)</li>
 </ul>
+<h3>Profile posts</h3>
+<p>Posts you add to your profile, in two kinds:</p>
+<ul>
+  <li><strong>Posts</strong>: a photo with an optional caption and an optional activity</li>
+  <li><strong>Goal posts</strong>: the name of something you achieved, the activity it belongs to, and optionally a photo and caption</li>
+</ul>
+<p>Each post is stored with the date you posted it. Who can see it depends on your profile settings (see Section 4).</p>
 <h3>Content you create in the App</h3>
 <ul>
   <li><strong>Daily proof posts</strong>: photos, videos, or notes you post to your accountability group, plus timestamps and whether a post landed on time or late</li>
   <li><strong>Forfeit and dispute records</strong>: what you owe, dispute reasons you write, and your votes on other members' disputes. Votes are stored per member but are only ever readable by the member who cast them. The App and other members only ever see the aggregate count, never who voted which way</li>
-  <li><strong>Meetup RSVPs</strong>: which meetups you've said you're attending</li>
+  <li><strong>Plans</strong>: plans you create, including &quot;I'm free now,&quot; with an optional title and place, a start and end time, and who the plan is for (your friends, your group, or only people you invite); who you invited; and which plans you have joined</li>
+  <li><strong>Friends</strong>: friend requests you send and receive, who you are friends with, and whether you met online or in person</li>
+  <li><strong>&quot;Tell me when they're free&quot; choices</strong>: which friends you asked to be notified about. That friend is not told</li>
+  <li><strong>Reports</strong> you file: what you reported, the category you chose, and the reason you wrote</li>
   <li><strong>Streak and attendance counters</strong> derived automatically from the above</li>
 </ul>
-<h3>Photos, and your camera and photo library</h3>
-<p>When you attach a photo to a daily proof post, the App asks for permission to use your camera or your photo library. We only ever receive the single image you choose. We do <strong>not</strong> browse, scan, or upload anything else from your library, and permission can be declined, and you can still post a note or mark a day done without a photo.</p>
-<p>Photos you post are uploaded to and stored by Supabase Storage (see Section 4). We keep the image itself, the group and account it belongs to, and the day it was posted for. We do not run face recognition, object recognition, or any other automated analysis on your photos, and we do not strip or read embedded camera metadata.</p>
-<p><strong>One thing worth being plain about:</strong> proof images are stored in a public storage bucket. The App only ever surfaces a photo's web address to members of that photo's group, and blocked members are excluded, but the address itself is not additionally password-protected, so anyone who obtained the exact address (for example, if a group member sent it to them) could open the image. Please treat proof photos as something you're comfortable sharing with your group, rather than as private storage.</p>
+<h3>Push notifications (only if you turn them on)</h3>
+<p>If you allow notifications on your iPhone, we collect:</p>
+<ul>
+  <li><strong>A push token</strong>: an identifier that Apple and Expo (see Section 4) give this install of the App so notifications can be delivered to it. It is not an advertising identifier and is not shared with advertisers</li>
+  <li><strong>Your phone's platform and time zone</strong>, and when the App last checked in, so notifications arrive at sensible times and a phone you no longer use stops receiving them</li>
+  <li><strong>Your notification settings</strong>: which kinds of notification you want</li>
+  <li><strong>A record of each notification sent to you</strong>: its title, its text, what it was about, and whether it was delivered. We keep this so the App never sends the same notification twice, keeps to its daily limits and quiet hours, and can stop sending to a phone the App has been removed from</li>
+</ul>
+<p>Nothing is sent to your phone unless you have allowed notifications in iOS, and each kind can be turned off in the App's notification settings.</p>
+<h3>Time zone</h3>
+<p>Your group's time zone decides when its daily proof window opens and closes. Your phone's time zone, if you turn on notifications, decides your quiet hours.</p>
+<h3>Photos, your camera and your photo library</h3>
+<p>When you add a photo to a daily proof post or a profile post, the App asks for permission to use your camera or your photo library. We only ever receive the single image you choose. We do <strong>not</strong> browse, scan, or upload anything else from your library, and permission can be declined.</p>
+<p>The camera is also used to scan a friend's code when you add each other in person. The scan is read on your phone and only the code is sent to us; no image from the camera is stored.</p>
+<p>Photos you post are uploaded to and stored by Supabase Storage (see Section 4). We do not run face recognition, object recognition, or any other automated analysis on your photos, and we do not strip or read embedded camera metadata.</p>
+<p><strong>Proof photos are stored in a public storage bucket.</strong> The App only ever shows a proof photo's web address to members of that photo's group, and blocked members are excluded, but the address itself is not additionally password-protected, so anyone who obtained the exact address (for example, if a group member sent it to them) could open the image. Please treat proof photos as something you're comfortable sharing with your group, rather than as private storage.</p>
+<p><strong>Profile post photos are stored privately.</strong> The App shows them through links that expire after one hour, and those links are only issued to people your profile settings allow. Someone who was given a link could open the photo until it expires.</p>
 <h3>What we do <strong>not</strong> collect</h3>
 <p>We want to be specific here rather than vague: as currently built, ProxI does <strong>not</strong> collect your location/GPS, does not access your contacts, does not use advertising identifiers or ad SDKs, does not use analytics or crash-tracking SDKs, and does not process payments (forfeits are informal social arrangements between friends; see the Terms of Service). If any of that changes, this section will be updated first.</p>
-<p>We also do not use AI to analyse you. The one place the App uses an AI service is rating how difficult a *public goal* is, from the goal's own text and nothing else (see Section 4). Nothing you write privately (proof notes, dispute reasons, your onboarding reflection) is ever sent to it, and it is never used to profile, score or rank people.</p>
+<p>We also do not use AI to analyse you. The one place the App uses an AI service is rating how difficult a *public goal* is, from the goal's own text and nothing else (see Section 4). Nothing you write privately (proof notes, profile posts, dispute reasons, your onboarding reflection) is ever sent to it, and it is never used to profile, score or rank people.</p>
 <h2>3. How we use what we collect</h2>
 <ul>
   <li>To create and secure your account, and let you log back in</li>
-  <li>To operate the App's core features: showing your group's daily proof wall, tracking streaks, running forfeit disputes and votes, and meetup RSVPs</li>
+  <li>To operate the App's core features: your group's daily proof wall, streaks, forfeit disputes and votes, plans, friends, and your profile</li>
+  <li>To send the notifications you have turned on, within the App's daily limits and quiet hours</li>
+  <li>To review reports and remove content that breaks the Terms of Service</li>
   <li>To communicate with you about your account (e.g., email confirmation)</li>
   <li>We do <strong>not</strong> use your data to serve you ads, and we do not sell your personal information to anyone</li>
 </ul>
 <h2>4. Who your data is shared with</h2>
-<p>We share data with two third-party service providers, plus Apple as the App Store operator:</p>
+<p>We share data with three third-party service providers, plus Apple as the App Store operator and the delivery network for notifications:</p>
 <ul>
-  <li><strong>Supabase, Inc.</strong>: our backend provider. Supabase hosts our database, handles authentication, and stores essentially all data described in Section 2 on our behalf, in the cloud region we selected when creating our project. This includes <strong>Supabase Storage</strong>, where the proof photos described in Section 2 are held. Supabase acts as our data processor: it stores the data under our direction and does not use it for its own purposes. See <a href="https://supabase.com/privacy" rel="noopener noreferrer" target="_blank">Supabase's privacy policy</a> for how they handle infrastructure-level data.</li>
+  <li><strong>Supabase, Inc.</strong>: our backend provider. Supabase hosts our database, handles authentication, runs the scheduled jobs that send notifications, and stores essentially all data described in Section 2 on our behalf, in the cloud region we selected when creating our project. This includes <strong>Supabase Storage</strong>, where proof photos and profile post photos are held. Supabase acts as our data processor: it stores the data under our direction and does not use it for its own purposes. See <a href="https://supabase.com/privacy" rel="noopener noreferrer" target="_blank">Supabase's privacy policy</a> for how they handle infrastructure-level data.</li>
+  <li><strong>Expo (650 Industries, Inc.)</strong>: our push notification service, used only if you turn notifications on. When a notification is sent to you, we send Expo the push token for your phone and the notification itself: the title and text you will see (which can include a friend's name, a plan's title, or your group's day number) and a few internal identifiers the App uses to open the right screen when you tap it. Expo passes the notification to Apple for delivery and tells us whether it was delivered. We do <strong>not</strong> send Expo your email, password, photos, proof posts, profile posts, or anything else in Section 2. See <a href="https://expo.dev/privacy" rel="noopener noreferrer" target="_blank">Expo's privacy policy</a>.</li>
   <li><strong>OpenAI, L.L.C.</strong>: used for one narrow purpose: estimating how hard a public goal is, so it can be shown with a difficulty rating. When a goal is posted to the public feed, we send OpenAI <strong>only the goal's title, its short description, and its topic tags</strong>, the same text that is already public on the feed for every signed-in person to read. We ask it to research roughly how many people manage that goal, and we store the resulting rating on the goal.</li>
 </ul>
-<p>We do <strong>not</strong> send OpenAI your name, username, email, account identifier, photos, proof posts, group activity, friends, notes, or anything else in Section 2. The goal text is not linked to you when it is sent, so what OpenAI receives is a sentence like &quot;Swim the channel crossing&quot; with no indication of who wrote it. If a rating cannot be established with reasonable confidence, no rating is stored and the goal simply shows no difficulty. See <a href="https://openai.com/policies/privacy-policy/" rel="noopener noreferrer" target="_blank">OpenAI's privacy policy</a> and their <a href="https://openai.com/policies/api-data-usage-policies/" rel="noopener noreferrer" target="_blank">API data usage terms</a>, under which API inputs are not used to train their models.</p>
+<p>We do <strong>not</strong> send OpenAI your name, username, email, account identifier, photos, proof posts, profile posts, group activity, friends, notes, or anything else in Section 2. The goal text is not linked to you when it is sent, so what OpenAI receives is a sentence like &quot;Swim the channel crossing&quot; with no indication of who wrote it. If a rating cannot be established with reasonable confidence, no rating is stored and the goal simply shows no difficulty. See <a href="https://openai.com/policies/privacy-policy/" rel="noopener noreferrer" target="_blank">OpenAI's privacy policy</a> and their <a href="https://openai.com/policies/api-data-usage-policies/" rel="noopener noreferrer" target="_blank">API data usage terms</a>, under which API inputs are not used to train their models.</p>
 <ul>
-  <li><strong>Apple Inc.</strong>: when you download the App through the App Store. Apple, per its own policies, may know that you use the App. We do not send Apple any of the information described in Section 2. See <a href="https://www.apple.com/legal/privacy/" rel="noopener noreferrer" target="_blank">Apple's privacy policy</a>.</li>
+  <li><strong>Apple Inc.</strong>: when you download the App through the App Store, Apple, per its own policies, may know that you use the App. If you turn on notifications, Apple's Push Notification service delivers them to your iPhone, and receives your phone's push token and each notification's content from Expo to do so. We do not send Apple any other information described in Section 2. See <a href="https://www.apple.com/legal/privacy/" rel="noopener noreferrer" target="_blank">Apple's privacy policy</a>.</li>
 </ul>
 <p>The App does not currently offer Sign in with Apple; accounts are created with an email address and password. If that changes, this section will be updated first.</p>
-<p>Members of your own accountability group see the profile and content information described in Section 2 that the App is designed to show them (your name, traits/interests, proof posts, dispute reasons, forfeit status). That visibility is the core of how the App works, not a third-party disclosure, and it's scoped to your group by database-level access rules, not just the app's UI.</p>
-<p><strong>Friends</strong> are separate from your group, and see less. Someone you have accepted as a friend sees your name, username, avatar, how and when you became friends, your current streak number, and whether you have posted today, and nothing else. They do <strong>not</strong> see your proof photos or videos, your proof notes, your traits, interests, goal description or reflection, which group you are in, or anything about your forfeits or disputes. Someone searching for you by username, before you are friends, sees only your name, username and avatar. This is enforced by database-level access rules, not by the app's UI.</p>
+<h3>Who inside the App sees what</h3>
+<p>Everything below is enforced by database-level access rules, not just by the App's screens. If you block someone, or they block you, neither of you sees anything of the other's described here.</p>
+<p><strong>Members of your accountability group</strong> see the group content the App is designed to show them: your name, traits and activities, proof posts, dispute reasons, and forfeit status. That visibility is the core of how the App works, not a third-party disclosure, and it is scoped to your group.</p>
+<p><strong>Friends</strong> are separate from your group. Someone you have accepted as a friend sees your name, username, avatar, how and when you became friends, your current streak number, and whether you have posted today. They also see the parts of your profile you share with friends. They do <strong>not</strong> see your proof photos or videos, your proof notes, your goal description or reflection, which group you are in, or anything about your forfeits or disputes.</p>
+<p><strong>Your profile</strong> has three parts, and you choose who sees each one in Edit Profile: your traits and activities, your goal posts, and your other posts. Each can be set to:</p>
+<ul>
+  <li><strong>Friends</strong> (the default): people you have added as friends</li>
+  <li><strong>Only me</strong>: nobody but you</li>
+  <li><strong>Everyone</strong>: anyone signed in to ProxI who finds your profile, for example by searching your username</li>
+</ul>
+<p>Anyone who can open your profile sees your name, username, avatar, and profile colour, and which of these settings each part uses, so a hidden part can say that it is shared with friends only. Someone searching for you by username sees your name, username and avatar in the results.</p>
+<p><strong>Plans</strong> are seen by the people the plan is for: your friends for a plan shared with friends (including &quot;I'm free now&quot;), your group for a group plan, or only the people you invited. Anyone who can see a plan can see who has joined it.</p>
+<p><strong>Notifications</strong> can mention you to someone else. If you invite someone to a plan, join their plan, call off a plan they joined, or send or accept a friend request, they may get a notification with your name in it. If a friend has asked to be told when you are free, they are notified when you post that you are; you are not told who asked.</p>
 <p>We do not share your data with data brokers, advertisers, or any other third party not listed above.</p>
 <h2>5. Data retention and deletion</h2>
-<p>We keep your data for as long as your account is active. Group history (who missed a day, dispute outcomes) is kept as a permanent record within your group by design. Settling a forfeit clears the debt but does not erase that the day was missed, matching how the App is meant to work.</p>
-<p><strong>To delete your account</strong>, use Delete Account in the App's Profile screen. This is permanent and takes effect immediately. It removes:</p>
+<p>We keep your data for as long as your account is active, except:</p>
+<ul>
+  <li><strong>Plans</strong> are deleted once they are more than 30 days old.</li>
+  <li><strong>Records of notifications sent to you</strong> are deleted after 30 days.</li>
+  <li><strong>Your push token</strong> is removed when you sign out on that phone or delete your account, and is no longer used once Expo reports that the App has been removed from that phone.</li>
+  <li><strong>A profile post you delete</strong> disappears for everyone straight away, and its photo is deleted from storage. Its text is kept, hidden, so a report about it can still be reviewed, until you delete your account.</li>
+</ul>
+<p>Group history (who missed a day, dispute outcomes) is kept as a permanent record within your group by design. Settling a forfeit clears the debt but does not erase that the day was missed, matching how the App is meant to work.</p>
+<p><strong>To delete your account</strong>, open your Profile, tap the menu button, choose Settings, then Delete account. This is permanent and takes effect immediately. It removes:</p>
 <ul>
   <li>your login, including your email address and password</li>
-  <li>your profile: name, username, traits, interests, and onboarding answers</li>
-  <li>every photo you posted as proof, deleted from storage</li>
-  <li>your proof history, streaks, group membership, meetup RSVPs, and any disputes you opened</li>
+  <li>your profile: name, username, traits, activities, settings, and onboarding answers</li>
+  <li>every photo you posted, as proof or on your profile, deleted from storage</li>
+  <li>your profile posts and goal posts</li>
+  <li>your proof history, streaks, group membership, and any disputes you opened</li>
+  <li>plans you created and the plans you joined</li>
   <li>your friends, any friend requests you had sent or received, and any unused in-person codes. Your friends simply stop seeing you in their list, and are not told why</li>
+  <li>your notification settings, the phones registered to receive your notifications, your &quot;tell me when they're free&quot; choices, and the record of notifications sent to you</li>
 </ul>
 <p>The one thing that remains is forfeits your group had already recorded, kept as part of that group's shared history with your name detached from them, so the group's own record still makes sense for the people still in it. Those entries no longer identify you.</p>
 <p>If the in-app deletion fails for any reason, email us at <strong>lucasborgarello@icloud.com</strong> and we will delete the account for you.</p>
 <h2>6. Your rights</h2>
 <p>Depending on where you live, you may have rights to access, correct, or delete your personal information, or to receive a copy of it. To exercise any of these rights, contact us at <strong>lucasborgarello@icloud.com</strong>; we will respond within a reasonable time.</p>
 <h2>7. Security</h2>
-<p>We rely on Supabase's infrastructure security and row-level database permissions to keep your data scoped to you, your group, and the friends you have accepted, each seeing a different and deliberately limited set, as described in Section 4. No method of storage or transmission is 100% secure, and we can't guarantee absolute security.</p>
+<p>We rely on Supabase's infrastructure security and row-level database permissions to keep your data scoped to you, your group, and the people your profile settings allow, each seeing a different and deliberately limited set, as described in Section 4. Profile post photos are only reachable through links that expire. Notifications travel to Expo and Apple over encrypted connections. No method of storage or transmission is 100% secure, and we can't guarantee absolute security.</p>
 <h2>8. Changes to this policy</h2>
 <p>If we change what we collect or who we share it with, we'll update this document and change the &quot;Last updated&quot; date above. Material changes (e.g., adding ad tracking or a new third-party processor) will be called out clearly, not buried in a version bump.</p>
 <h2>9. Contact</h2>
