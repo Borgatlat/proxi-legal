@@ -3,42 +3,945 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ProxI Legal</title>
+<title>ProxI: stop scrolling past your friends</title>
+<meta name="description" content="ProxI turns your friends into a small group that keeps each other going, and turns &quot;we should hang out&quot; into a real plan. For iPhone. No ads.">
 <link rel="canonical" href="https://borgatlat.github.io/proxi-legal/">
+<link rel="icon" type="image/png" href="icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ProxI: stop scrolling past your friends">
+<meta property="og:description" content="Keep your goals with your friends, and actually see them. For iPhone. No ads.">
+<meta property="og:image" content="https://borgatlat.github.io/proxi-legal/icon.png">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Manrope:wght@500;700&display=swap">
-<link rel="stylesheet" href="legal.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+/* Hand-written, not generated. scripts/build-legal.js owns the legal pages
+   and legal.css, and deliberately never touches this file.
+   Colours come from src/theme/tokens.js: green is "you", honey is progress,
+   sky is overlap between two people. */
+
+:root {
+  --green-dark: #1B4332;
+  --green-mid: #2D6A4F;
+  --green-light: #D6E4DB;
+  --honey-dark: #C68B12;
+  --honey-mid: #E3B23C;
+  --honey-light: #F7EED4;
+  --amber-text: #7A5F1E;
+  --sky-dark: #2A6A88;
+  --sky-mid: #79B0D0;
+  --sky-light: #E8F1F7;
+  --ink: #14241B;
+  --muted: #5E6A62;
+  --muted-light: #8A958E;
+  --bg: #EEF4EF;
+  --surface: #FFFFFF;
+  --hairline: rgba(20, 36, 27, .10);
+  --shadow: 0 1px 2px rgba(20, 36, 27, .05), 0 12px 32px rgba(20, 36, 27, .08);
+  --cta-bg: #1B4332;
+  --cta-text: #FFFFFF;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --green-dark: #D6E4DB;
+    --green-mid: #7FC4A0;
+    --green-light: #1D3A2A;
+    --honey-dark: #E3B23C;
+    --honey-light: #33290F;
+    --amber-text: #E3B23C;
+    --sky-dark: #8FC3E0;
+    --sky-light: #16303D;
+    --ink: #E8F0EA;
+    --muted: #A3B1A8;
+    --muted-light: #7D8C82;
+    --bg: #0E1F16;
+    --surface: #16311F;
+    --hairline: rgba(232, 240, 234, .12);
+    --shadow: 0 1px 2px rgba(0, 0, 0, .2), 0 12px 32px rgba(0, 0, 0, .25);
+    --cta-bg: #7FC4A0;
+    --cta-text: #0E1F16;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--muted);
+  font-family: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+}
+
+a { color: var(--green-mid); }
+a:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--green-mid);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+h1, h2, h3 {
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  font-weight: 600;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+@media (min-width: 640px) { .wrap { padding: 0 28px; } }
+
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  margin-bottom: 14px;
+}
+
+/* ---------- buttons ---------- */
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 26px;
+  border-radius: 999px;
+  background: var(--cta-bg);
+  color: var(--cta-text);
+  font-weight: 800;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(27, 67, 50, .25);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.cta:hover { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(27, 67, 50, .3); }
+@media (prefers-reduced-motion: reduce) { .cta { transition: none; } .cta:hover { transform: none; } }
+
+.ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 16px 22px;
+  border-radius: 999px;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  background: var(--surface);
+}
+.ghost:hover { box-shadow: inset 0 0 0 1px var(--green-mid); }
+
+.reassure {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--muted-light);
+}
+.reassure span { display: inline-flex; align-items: center; gap: 6px; }
+.reassure span::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--honey-mid);
+}
+
+/* ---------- nav ---------- */
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 700;
+  font-size: 22px;
+}
+.brand img { width: 34px; height: 34px; border-radius: 9px; }
+
+.nav-right { display: flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 600; }
+.nav-right > a:not(.nav-cta) { color: var(--muted); text-decoration: none; }
+.nav-right > a:not(.nav-cta):hover { color: var(--ink); }
+.nav-cta {
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--cta-bg);
+  color: var(--cta-text);
+  text-decoration: none;
+  font-weight: 700;
+}
+@media (max-width: 640px) { .nav-right .optional { display: none; } }
+
+/* ---------- hero ---------- */
+
+.hero {
+  display: grid;
+  gap: 44px;
+  align-items: center;
+  padding: 36px 0 72px;
+}
+@media (min-width: 920px) {
+  .hero { grid-template-columns: 1.1fr .9fr; padding: 60px 0 96px; }
+}
+
+.hero h1 {
+  font-size: clamp(40px, 6.6vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -.015em;
+  margin-bottom: 22px;
+}
+.hero h1 em { font-style: normal; color: var(--green-mid); }
+
+.hero .lede { font-size: clamp(17px, 2vw, 20px); max-width: 540px; margin-bottom: 30px; }
+.hero .lede strong { color: var(--ink); font-weight: 700; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+/* ---------- phone mock ----------
+   Drawn to look like the app, so it keeps the app's light colours in dark
+   mode too: it is a picture of a screen, not part of this page's theme. */
+
+.phone-stage { display: flex; justify-content: center; position: relative; }
+
+.phone-stage::before {
+  content: "";
+  position: absolute;
+  inset: 6% 0 2%;
+  background: radial-gradient(closest-side, rgba(121, 176, 208, .38), transparent);
+  filter: blur(8px);
+}
+
+.phone {
+  position: relative;
+  width: min(330px, 100%);
+  background: #0E1F16;
+  border-radius: 46px;
+  padding: 11px;
+  box-shadow: 0 30px 60px rgba(20, 36, 27, .22), 0 2px 6px rgba(20, 36, 27, .12);
+}
+
+.float {
+  position: absolute;
+  z-index: 2;
+  background: #FFFFFF;
+  color: #14241B;
+  border-radius: 16px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  box-shadow: 0 14px 30px rgba(20, 36, 27, .18);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+}
+.float i { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-style: normal; color: #fff; font-size: 12px; }
+/* Kept to the phone's edges, where they cover only its frame: over the
+   screen they would hide the very buttons the mock is showing off. */
+.float.one { top: -4%; left: -8%; }
+.float.two { bottom: -3%; right: -8%; }
+@media (max-width: 480px) { .float.one { left: -2%; } .float.two { right: -2%; } }
+
+.screen {
+  background: #EEF4EF;
+  border-radius: 36px;
+  padding: 44px 16px 22px;
+  color: #6A756E;
+  font-size: 12px;
+  line-height: 1.45;
+  position: relative;
+  overflow: hidden;
+}
+.screen::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92px;
+  height: 24px;
+  background: #0E1F16;
+  border-radius: 14px;
+}
+
+.m-title { font-family: "Fraunces", Georgia, serif; font-weight: 700; font-size: 26px; color: #14241B; margin-bottom: 12px; }
+.m-free {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #1B4332; color: #fff; border-radius: 18px; padding: 12px 14px; margin-bottom: 4px;
+}
+.m-free b { font-size: 13px; }
+.m-free span { font-size: 11px; opacity: .8; }
+.m-label { margin: 16px 0 8px; font-size: 9.5px; font-weight: 700; letter-spacing: .1em; color: #6A756E; }
+.m-card { background: #fff; border-radius: 18px; padding: 12px; display: flex; gap: 10px; }
+.m-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 13px;
+}
+.m-card h4 { margin: 0; font-family: "Manrope", sans-serif; font-size: 12.5px; color: #14241B; font-weight: 700; line-height: 1.35; }
+.m-card p { margin-top: 2px; font-size: 11px; }
+.m-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+.m-chip { border-radius: 999px; padding: 6px 10px; font-size: 10.5px; font-weight: 700; background: #E4EAE5; color: #14241B; }
+.m-chip.go { background: #2A6A88; color: #fff; }
+.m-off { margin-top: 6px; font-size: 10px; font-weight: 600; color: #98A29B; }
+
+/* ---------- sections ---------- */
+
+section.block { padding: 88px 0 0; }
+
+.section-head { max-width: 700px; margin-bottom: 36px; }
+.section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+.section-head h2 { font-size: clamp(30px, 4.6vw, 46px); line-height: 1.08; margin-bottom: 14px; }
+.section-head p { font-size: 17.5px; }
+
+/* problem */
+
+.problem {
+  background: var(--surface);
+  border-radius: 32px;
+  padding: 40px 24px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+@media (min-width: 640px) { .problem { padding: 56px 48px; } }
+.problem h2 { font-size: clamp(28px, 4.2vw, 42px); line-height: 1.12; max-width: 760px; margin: 0 auto 16px; }
+.problem p { max-width: 620px; margin: 0 auto; font-size: 17.5px; }
+.problem .turn { margin-top: 18px; color: var(--ink); font-weight: 700; }
+
+/* steps */
+
+.steps { display: grid; gap: 16px; counter-reset: step; }
+@media (min-width: 820px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+
+.step {
+  background: var(--surface);
+  border-radius: 26px;
+  padding: 26px 24px;
+  box-shadow: var(--shadow);
+}
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--green-light);
+  color: var(--green-mid);
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+.step:nth-child(2)::before { background: var(--honey-light); color: var(--honey-dark); }
+.step:nth-child(3)::before { background: var(--sky-light); color: var(--sky-dark); }
+.step h3 { font-size: 22px; line-height: 1.2; margin-bottom: 8px; }
+.step p { font-size: 15.5px; }
+
+/* two halves */
+
+.halves { display: grid; gap: 18px; }
+@media (min-width: 860px) { .halves { grid-template-columns: 1fr 1fr; } }
+
+.half {
+  background: var(--surface);
+  border-radius: 28px;
+  padding: 30px 26px;
+  box-shadow: var(--shadow);
+  border-top: 5px solid var(--honey-mid);
+}
+.half.friends { border-top-color: var(--sky-mid); }
+
+.tag {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--honey-light);
+  color: var(--amber-text);
+  margin-bottom: 14px;
+}
+.half.friends .tag { background: var(--sky-light); color: var(--sky-dark); }
+
+.half h3 { font-size: 26px; line-height: 1.2; margin-bottom: 18px; }
+
+.ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 13px; }
+.ticks li { display: flex; gap: 12px; font-size: 15.5px; }
+.ticks li::before {
+  content: "";
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: var(--honey-light) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%23C68B12' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat;
+}
+.half.friends .ticks li::before {
+  background-color: var(--sky-light);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%232A6A88' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.ticks strong { color: var(--ink); font-weight: 700; }
+
+/* features */
+
+.features { display: grid; gap: 18px; }
+@media (min-width: 760px) { .features { grid-template-columns: 1fr 1fr; } }
+
+.feature {
+  background: var(--surface);
+  border-radius: 28px;
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.feature h3 { font-size: 23px; line-height: 1.2; }
+.feature p { font-size: 15.5px; }
+.feature .rule { font-size: 13.5px; color: var(--sky-dark); font-weight: 700; }
+
+.demo {
+  margin-top: auto;
+  background: #EEF4EF;
+  border-radius: 20px;
+  padding: 14px;
+  color: #6A756E;
+  font-size: 12px;
+}
+.demo .m-card { box-shadow: 0 1px 2px rgba(20, 36, 27, .06); }
+
+.badges { display: flex; flex-wrap: wrap; gap: 7px; }
+.badge { border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 600; border: 1.5px solid #9C6B98; color: #5B2E57; }
+.badge.trait { border-color: transparent; background: #EFE3EE; font-weight: 700; }
+.badge.shared { border-color: #79B0D0; background: #79B0D0; color: #14241B; font-weight: 700; }
+.demo-line { margin-top: 10px; font-size: 11.5px; }
+
+.midcta { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 18px; text-align: center; }
+.midcta p { font-size: 15px; font-weight: 600; color: var(--ink); }
+
+/* privacy */
+
+.privacy { display: grid; gap: 14px; }
+@media (min-width: 640px) { .privacy { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 980px) { .privacy { grid-template-columns: repeat(3, 1fr); } }
+
+.promise {
+  background: var(--surface);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+.promise h3 { font-family: "Manrope", sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.promise p { font-size: 14.5px; }
+
+/* faq */
+
+.faq { max-width: 780px; margin: 0 auto; display: grid; gap: 10px; }
+.faq details {
+  background: var(--surface);
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 20px 56px 20px 22px;
+  position: relative;
+  font-weight: 700;
+  font-size: 16.5px;
+  color: var(--ink);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--green-light);
+  color: var(--green-mid);
+  font-size: 18px;
+  font-weight: 700;
+}
+.faq details[open] summary::after { content: "\2212"; }
+.faq details p { padding: 0 22px 20px; font-size: 15.5px; }
+
+/* closing */
+
+.closing {
+  margin: 96px 0 0;
+  background: #1B4332;
+  color: #D6E4DB;
+  border-radius: 32px;
+  padding: 56px 24px;
+  text-align: center;
+}
+@media (prefers-color-scheme: dark) { .closing { background: #16311F; box-shadow: inset 0 0 0 1px rgba(232, 240, 234, .12); } }
+.closing img { width: 76px; height: 76px; border-radius: 19px; margin-bottom: 20px; }
+.closing h2 { color: #FFFFFF; font-size: clamp(32px, 5vw, 50px); line-height: 1.06; margin-bottom: 14px; }
+.closing p { max-width: 520px; margin: 0 auto 28px; font-size: 17.5px; }
+.closing .cta { background: #FFFFFF; color: #1B4332; box-shadow: 0 10px 24px rgba(0, 0, 0, .25); }
+.closing .reassure { justify-content: center; color: #9FC0AD; }
+
+/* footer */
+
+footer { padding: 40px 0 48px; font-size: 14px; }
+.foot { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; justify-content: space-between; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.foot-links a { color: var(--muted); text-decoration: none; font-weight: 600; }
+.foot-links a:hover { color: var(--ink); }
+.foot small { color: var(--muted-light); font-size: 13px; }
+
+/* sticky bar: phones only, shown once the hero button has scrolled away */
+
+.sticky {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 20;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 10px 10px 14px;
+  border-radius: 22px;
+  background: var(--surface);
+  box-shadow: 0 16px 40px rgba(20, 36, 27, .22), inset 0 0 0 1px var(--hairline);
+  transform: translateY(140%);
+  transition: transform .25s ease;
+}
+.sticky.show { transform: translateY(0); }
+.sticky img { width: 38px; height: 38px; border-radius: 10px; }
+.sticky div { flex: 1; min-width: 0; line-height: 1.25; }
+.sticky b { display: block; color: var(--ink); font-size: 14.5px; }
+.sticky span { font-size: 12px; }
+.sticky .cta { padding: 11px 16px; font-size: 14px; box-shadow: none; }
+@media (max-width: 760px) {
+  .sticky { display: flex; }
+  footer { padding-bottom: 110px; }
+}
+@media (prefers-reduced-motion: reduce) { .sticky { transition: none; } }
+</style>
 </head>
 <body>
-<main class="page">
-<h1>ProxI</h1>
-<p class="lede">
-ProxI is a daily-proof app for small groups: you and your friends agree a goal,
-post proof each day, and whoever misses owes the forfeit the group picked.
-</p>
-<div class="docs">
-  <a class="doc" href="privacy.html">
-    <span class="doc-name">Privacy Policy</span>
-    <span class="doc-note">What the app collects, why, and who it reaches.</span>
-  </a>
-  <a class="doc" href="terms.html">
-    <span class="doc-name">Terms of Service</span>
-    <span class="doc-note">The rules for using ProxI, and what we commit to.</span>
-  </a>
-  <a class="doc" href="support.html">
-    <span class="doc-name">Support</span>
-    <span class="doc-note">Get help, report a problem, or delete your account.</span>
-  </a>
+
+<div class="wrap">
+
+  <header class="nav">
+    <a class="brand" href="./">
+      <img src="icon.png" alt="" width="34" height="34">
+      ProxI
+    </a>
+    <nav class="nav-right" aria-label="Main">
+      <a class="optional" href="#how">How it works</a>
+      <a class="optional" href="#faq">FAQ</a>
+      <a class="nav-cta" data-cta data-cta-short href="mailto:lucasborgarello@icloud.com?subject=ProxI%20early%20access&amp;body=I%27d%20like%20to%20try%20ProxI%20when%20it%20launches.">Get early access</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div>
+        <span class="eyebrow">For you and the friends you actually know</span>
+        <h1>Stop scrolling past your friends. <em>Start seeing them.</em></h1>
+        <p class="lede">
+          ProxI turns your friends into a small group that <strong>keeps each other going</strong>,
+          and turns "we should hang out sometime" into <strong>a real plan</strong>.
+        </p>
+        <div class="actions" id="hero-actions">
+          <a class="cta" data-cta href="mailto:lucasborgarello@icloud.com?subject=ProxI%20early%20access&amp;body=I%27d%20like%20to%20try%20ProxI%20when%20it%20launches.">
+            <span data-cta-label>Get early access</span>
+          </a>
+          <a class="ghost" href="#how">See how it works</a>
+        </div>
+        <div class="reassure">
+          <span>Made for iPhone</span>
+          <span>No ads</span>
+          <span>No subscriptions</span>
+        </div>
+      </div>
+
+      <div class="phone-stage">
+        <div class="phone" role="img" aria-label="The ProxI Friends tab, showing that you and Jamie both want to catch up, and asking whether to go swimming with Sam again.">
+          <div class="float one" aria-hidden="true"><i style="background:#C68B12">14</i>Day 14 streak</div>
+          <div class="float two" aria-hidden="true"><i style="background:#2A6A88">J</i>Jamie is free now</div>
+          <div class="screen" aria-hidden="true">
+            <div class="m-title">Friends</div>
+            <div class="m-free"><b>I'm free now</b><span>Tell your friends</span></div>
+
+            <div class="m-label">YOU BOTH SAID IT</div>
+            <div class="m-card">
+              <div class="m-avatar" style="background:#2A6A88">J</div>
+              <div>
+                <h4>You and Jamie both want to catch up</h4>
+                <p>Neither of you knew until you both said it. Say when you are free.</p>
+                <div class="m-chips"><span class="m-chip go">Say when I am free</span></div>
+              </div>
+            </div>
+
+            <div class="m-label">AGAIN?</div>
+            <div class="m-card">
+              <div class="m-avatar" style="background:#E07B39">S</div>
+              <div>
+                <h4>Swimming with Sam again?</h4>
+                <p>If you would like to, pick a time. Nobody is told if you do not.</p>
+                <div class="m-chips">
+                  <span class="m-chip go">Pick a time</span>
+                  <span class="m-chip">Not this one</span>
+                </div>
+              </div>
+            </div>
+            <div class="m-off">Stop suggesting these</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROBLEM ============ -->
+    <section class="problem" aria-labelledby="problem-title">
+      <span class="eyebrow">Sound familiar?</span>
+      <h2 id="problem-title">You see your friends' posts every day. You see your friends a few times a year.</h2>
+      <p>
+        "We should catch up" gets said a lot and planned almost never. Goals go the same way: easy to start
+        on your own, easy to quietly drop when nobody notices.
+      </p>
+      <p class="turn">ProxI puts the people you care about back in the loop, for both.</p>
+    </section>
+
+    <!-- ============ STEPS ============ -->
+    <section class="block" id="how" aria-labelledby="how-title">
+      <div class="section-head center">
+        <span class="eyebrow">How it works</span>
+        <h2 id="how-title">Three steps from "we should" to "see you there".</h2>
+      </div>
+
+      <div class="steps">
+        <article class="step">
+          <h3>Bring your people</h3>
+          <p>Start a group and share its invite code, or add friends in person by trading a code on your phones.</p>
+        </article>
+        <article class="step">
+          <h3>Show up for each other</h3>
+          <p>Post proof of what you did each day. Miss it, and you owe the small forfeit your group picked.</p>
+        </article>
+        <article class="step">
+          <h3>Actually meet up</h3>
+          <p>Tap "I'm free now" or pick a time. ProxI helps the plan happen, even when nobody wants to ask first.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ TWO HALVES ============ -->
+    <section class="block" aria-labelledby="halves-title">
+      <div class="section-head">
+        <span class="eyebrow">Everything inside</span>
+        <h2 id="halves-title">A group that keeps you going. Friends you actually see.</h2>
+        <p>Two halves of one app, with the same people in both.</p>
+      </div>
+
+      <div class="halves">
+        <article class="half">
+          <span class="tag">Your group</span>
+          <h3>Stick with it, because your friends are watching.</h3>
+          <ul class="ticks">
+            <li><span><strong>Agree a goal</strong> and a daily window together.</span></li>
+            <li><span><strong>Post a photo, video or note</strong> as proof of what you did.</span></li>
+            <li><span><strong>No peeking.</strong> Everyone else's proof unlocks when yours goes up.</span></li>
+            <li><span><strong>Miss the window</strong> and owe the forfeit, like buying the coffee.</span></li>
+            <li><span><strong>Fair when life happens.</strong> Dispute a miss, and two thirds of your group can waive it.</span></li>
+          </ul>
+        </article>
+
+        <article class="half friends">
+          <span class="tag">Your friends</span>
+          <h3>Make plans that turn into real time together.</h3>
+          <ul class="ticks">
+            <li><span><strong>"I'm free now"</strong> in one tap, or pick a time later in the week.</span></li>
+            <li><span><strong>Sort the details</strong> in a message thread that belongs to the plan.</span></li>
+            <li><span><strong>Hear when a friend is free,</strong> for the friends you choose.</span></li>
+            <li><span><strong>A list of real friends.</strong> Online adds are capped at ten, and everyone else you add in person.</span></li>
+            <li><span><strong>Up to five groups,</strong> for the gym crew, the book club and everyone in between.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="block" aria-labelledby="first-title">
+      <div class="section-head">
+        <span class="eyebrow">No more awkward first move</span>
+        <h2 id="first-title">Never be the one left hanging.</h2>
+        <p>The hardest part of seeing a friend is asking first. ProxI makes asking cost nothing, and it never shows you as the one who reached out and was not met.</p>
+      </div>
+
+      <div class="features">
+        <article class="feature">
+          <span class="eyebrow">Mutual</span>
+          <h3>Want to see someone? Say it privately.</h3>
+          <p>Mark a friend you would like to see. They only find out if they mark you too, and then you are both told at the same moment.</p>
+          <p class="rule">No counts, no hints, no pressure.</p>
+          <div class="demo" aria-hidden="true">
+            <div class="m-card">
+              <div style="flex:1">
+                <h4>I'd like to see Jamie</h4>
+                <p>Private. They only ever find out if they say it about you too.</p>
+              </div>
+              <div style="flex:none;width:40px;height:24px;border-radius:12px;background:#2A6A88;padding:3px;display:flex;justify-content:flex-end;align-self:center">
+                <div style="width:18px;height:18px;border-radius:50%;background:#fff"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="feature">
+          <span class="eyebrow">Just met</span>
+          <h3>Met someone great? It asks you both.</h3>
+          <p>After you add someone in person, ProxI privately asks each of you when you are free. A plan appears only when both of you answer.</p>
+          <p class="rule">Nobody is told you were asked.</p>
+          <div class="demo" aria-hidden="true">
+            <div class="m-card">
+              <div class="m-avatar" style="background:#2D6A4F">A</div>
+              <div>
+                <h4>You added Ana in person.</h4>
+                <p>Say when you are free. They only find out if they say it too.</p>
+                <div class="m-chips"><span class="m-chip go">Say when I am free</span><span class="m-chip">Not now</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="feature">
+          <span class="eyebrow">Shared activities</span>
+          <h3>Never stare at a blank message again.</h3>
+          <p>On a friend's profile, the things you both love stand out. Tap one and the plan already knows what it is for.</p>
+          <p class="rule">Only uses what you could already see.</p>
+          <div class="demo" aria-hidden="true">
+            <div class="badges">
+              <span class="badge trait">Early riser</span>
+              <span class="badge shared">Swimming</span>
+              <span class="badge shared">Food</span>
+              <span class="badge">Cycling</span>
+            </div>
+            <p class="demo-line">You both do swimming and food. Tap one to pick a time.</p>
+          </div>
+        </article>
+
+        <article class="feature">
+          <span class="eyebrow">Do this again</span>
+          <h3>Had a great time? Do it again.</h3>
+          <p>After a plan, the people who went get one easy offer to repeat it with the same people. One tap to pick a time.</p>
+          <p class="rule">No guilt trips. Off whenever you like.</p>
+          <div class="demo" aria-hidden="true">
+            <div class="m-card">
+              <div class="m-avatar" style="background:#A9703F">R</div>
+              <div>
+                <h4>Dinner with Riley again?</h4>
+                <p>If you would like to, pick a time. Nobody is told if you do not.</p>
+                <div class="m-chips"><span class="m-chip go">Pick a time</span><span class="m-chip">Not this one</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="midcta">
+        <p>Your friends are one tap away from a plan.</p>
+        <a class="cta" data-cta href="mailto:lucasborgarello@icloud.com?subject=ProxI%20early%20access&amp;body=I%27d%20like%20to%20try%20ProxI%20when%20it%20launches."><span data-cta-label>Get early access</span></a>
+      </div>
+    </section>
+
+    <!-- ============ PRIVACY ============ -->
+    <section class="block" id="privacy" aria-labelledby="privacy-title">
+      <div class="section-head">
+        <span class="eyebrow">Privacy</span>
+        <h2 id="privacy-title">Your friends, not an audience.</h2>
+        <p>ProxI is for people you know, so it is built to show as little as possible and never more than you chose.</p>
+      </div>
+
+      <div class="privacy">
+        <div class="promise">
+          <h3>No ads, ever</h3>
+          <p>No advertising, no ad identifiers, and your data is never sold.</p>
+        </div>
+        <div class="promise">
+          <h3>No analytics or tracking</h3>
+          <p>No analytics or crash-tracking SDKs watching how you use the app.</p>
+        </div>
+        <div class="promise">
+          <h3>You choose who sees what</h3>
+          <p>Show each part of your profile to everyone, to friends, or only to you.</p>
+        </div>
+        <div class="promise">
+          <h3>Report and block anything</h3>
+          <p>Every post, plan, message and profile can be reported, and reports are reviewed within 24 hours.</p>
+        </div>
+        <div class="promise">
+          <h3>Your birthday stays yours</h3>
+          <p>We check your age at sign-up, and your date of birth is never shown to anyone.</p>
+        </div>
+        <div class="promise">
+          <h3>Leave anytime</h3>
+          <p>Delete your account from inside the app, and your login, profile and photos go with it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="block" id="faq" aria-labelledby="faq-title">
+      <div class="section-head center">
+        <span class="eyebrow">Questions</span>
+        <h2 id="faq-title">Good to know.</h2>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>Do my friends need ProxI too?</summary>
+          <p>Yes, and that is the point. ProxI is built for people you already know, so it gets better with every friend you bring. Start a group and share its invite code, or trade codes in person.</p>
+        </details>
+        <details>
+          <summary>Is this another social media app?</summary>
+          <p>No. It is built around a small group and the friends you have met. There are no ads, and online friend adds are capped at ten, so your list stays people you actually know.</p>
+        </details>
+        <details>
+          <summary>Does a forfeit cost real money?</summary>
+          <p>Only if your group decides it should. A forfeit is whatever your group picks, like buying the next coffee. ProxI never handles money.</p>
+        </details>
+        <details>
+          <summary>What if I miss a day for a good reason?</summary>
+          <p>Dispute it. Your group votes, and if two thirds agree, the forfeit is waived.</p>
+        </details>
+        <details>
+          <summary>Will people know if I want to see them and they don't feel the same?</summary>
+          <p>Never. They only find out you marked them if they mark you too. Otherwise nobody is told, and there are no counts or hints.</p>
+        </details>
+        <details>
+          <summary>Can I use it on Android?</summary>
+          <p>ProxI is launching on iPhone first. Get early access and we will let you know about other devices.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ============ CLOSING ============ -->
+    <section class="closing" id="get" aria-labelledby="closing-title">
+      <img src="icon.png" alt="The ProxI app icon" width="76" height="76">
+      <h2 id="closing-title">Your friends are closer than your feed.</h2>
+      <p>Bring the people you care about into one small app, and start seeing them again.</p>
+      <a class="cta" data-cta href="mailto:lucasborgarello@icloud.com?subject=ProxI%20early%20access&amp;body=I%27d%20like%20to%20try%20ProxI%20when%20it%20launches."><span data-cta-label>Get early access</span></a>
+      <div class="reassure">
+        <span>Made for iPhone</span>
+        <span>No ads</span>
+        <span>No subscriptions</span>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="foot">
+      <div class="foot-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="support.html">Support</a>
+        <a href="mailto:lucasborgarello@icloud.com">Contact</a>
+      </div>
+      <small>&copy; 2026 BetterU LLC</small>
+    </div>
+  </footer>
+
 </div>
-<p>
-Both documents are also readable inside the app, under Profile &rarr; Legal, so
-they work with no connection.
-</p>
-<footer>
-ProxI is operated by BetterU LLC. Questions about either document:
-<a href="mailto:lucasborgarello@icloud.com">lucasborgarello@icloud.com</a>.
-</footer>
-</main>
+
+<aside class="sticky" id="sticky" aria-label="Get ProxI">
+  <img src="icon.png" alt="" width="38" height="38">
+  <div>
+    <b>ProxI</b>
+    <span>See your friends again</span>
+  </div>
+  <a class="cta" data-cta href="mailto:lucasborgarello@icloud.com?subject=ProxI%20early%20access&amp;body=I%27d%20like%20to%20try%20ProxI%20when%20it%20launches."><span data-cta-label>Get early access</span></a>
+</aside>
+
+<script>
+  // ============================================================
+  // Launch switch. Everything that asks someone to get the app reads this.
+  // Paste the App Store link here once ProxI is live (a public TestFlight
+  // link works too), and every button on the page becomes a download button.
+  // Left empty, the buttons ask for early access by email, which works with
+  // no server and nothing stored by this page.
+  // ============================================================
+  const APP_STORE_URL = '';
+
+  if (APP_STORE_URL) {
+    document.querySelectorAll('[data-cta]').forEach((el) => {
+      el.href = APP_STORE_URL;
+      el.target = '_blank';
+      el.rel = 'noopener';
+      const label = el.querySelector('[data-cta-label]');
+      const text = 'Download on iPhone';
+      if (label) label.textContent = text;
+      else el.textContent = el.hasAttribute('data-cta-short') ? 'Download' : text;
+    });
+  }
+
+  // The phone-only bar appears once the hero button has scrolled out of view,
+  // and steps aside while the closing section's own button is on screen, so
+  // there is never a second identical button sitting on top of the first.
+  const sticky = document.getElementById('sticky');
+  const heroButtons = document.getElementById('hero-actions');
+  const closing = document.getElementById('get');
+  if (sticky && heroButtons && closing) {
+    const onScreen = (el) => {
+      const r = el.getBoundingClientRect();
+      return r.bottom > 0 && r.top < window.innerHeight;
+    };
+    let queued = false;
+    const update = () => {
+      queued = false;
+      sticky.classList.toggle('show', !onScreen(heroButtons) && !onScreen(closing));
+    };
+    const schedule = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    update();
+  }
+</script>
+
 </body>
 </html>

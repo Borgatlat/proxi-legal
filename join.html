@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join a group on ProxI</title>
+<meta name="description" content="Someone invited you to their group on ProxI.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="icon.png">
+<meta property="og:title" content="You're invited to a group on ProxI">
+<meta property="og:description" content="Tap to join. You'll need the ProxI app on your iPhone.">
+<meta property="og:image" content="https://borgatlat.github.io/proxi-legal/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+/* The page a group invite link opens. Shared invites used to be proxi://
+   links, which do nothing for anyone who does not have the app yet, and
+   that is exactly who an invite is for. This page works either way: it
+   opens the group in the app, or shows the code and where to get the app.
+
+   The code is read from the address and only ever shown if it has the exact
+   shape of a real one, and it is written as text, never as HTML. */
+
+:root {
+  --green-dark: #1B4332;
+  --green-mid: #2D6A4F;
+  --green-light: #D6E4DB;
+  --honey-mid: #E3B23C;
+  --ink: #14241B;
+  --muted: #5E6A62;
+  --muted-light: #8A958E;
+  --bg: #EEF4EF;
+  --surface: #FFFFFF;
+  --hairline: rgba(20, 36, 27, .10);
+  --cta-bg: #1B4332;
+  --cta-text: #FFFFFF;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --green-mid: #7FC4A0;
+    --green-light: #1D3A2A;
+    --ink: #E8F0EA;
+    --muted: #A3B1A8;
+    --muted-light: #7D8C82;
+    --bg: #0E1F16;
+    --surface: #16311F;
+    --hairline: rgba(232, 240, 234, .12);
+    --cta-bg: #7FC4A0;
+    --cta-text: #0E1F16;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--muted);
+  font-family: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 48px;
+}
+main { width: 100%; max-width: 440px; text-align: center; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-family: "Fraunces", Georgia, serif; font-weight: 700; font-size: 22px; }
+.brand img { width: 34px; height: 34px; border-radius: 9px; }
+h1 { margin: 34px 0 10px; font-family: "Fraunces", Georgia, serif; font-weight: 700; color: var(--ink); font-size: clamp(30px, 8vw, 38px); line-height: 1.1; text-wrap: balance; }
+.lede { margin: 0 auto 26px; max-width: 360px; font-size: 16.5px; }
+.code-card { background: var(--surface); border-radius: 24px; padding: 22px; box-shadow: inset 0 0 0 1px var(--hairline); margin-bottom: 20px; }
+.code-label { font-size: 11px; font-weight: 700; letter-spacing: .14em; color: var(--muted-light); }
+.code { margin-top: 8px; font-family: "Fraunces", Georgia, serif; font-weight: 700; font-size: 40px; letter-spacing: .18em; color: var(--green-mid); }
+.copy { margin-top: 12px; border: 0; background: var(--green-light); color: var(--green-mid); font: inherit; font-weight: 700; font-size: 13.5px; padding: 8px 16px; border-radius: 999px; cursor: pointer; }
+.cta { display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px 22px; border-radius: 999px; background: var(--cta-bg); color: var(--cta-text); font-weight: 800; font-size: 16px; text-decoration: none; margin-bottom: 12px; }
+.ghost { display: flex; align-items: center; justify-content: center; width: 100%; padding: 15px 22px; border-radius: 999px; background: var(--surface); color: var(--ink); font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: inset 0 0 0 1px var(--hairline); }
+.steps { margin: 28px 0 0; padding: 0; list-style: none; text-align: left; display: grid; gap: 12px; }
+.steps li { display: flex; gap: 12px; font-size: 15px; }
+.steps b { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--green-light); color: var(--green-mid); font-size: 13px; }
+.steps strong { color: var(--ink); }
+.bad { background: var(--surface); border-radius: 24px; padding: 22px; box-shadow: inset 0 0 0 1px var(--hairline); }
+footer { margin-top: 34px; font-size: 13px; }
+footer a { color: var(--muted); margin: 0 8px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 3px; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <a class="brand" href="./"><img src="icon.png" alt="" width="34" height="34">ProxI</a>
+
+  <section id="invite" hidden>
+    <h1>You're invited to a group</h1>
+    <p class="lede">A friend wants you in their group on ProxI, where you keep each other going and actually meet up.</p>
+
+    <div class="code-card">
+      <div class="code-label">INVITE CODE</div>
+      <div class="code" id="code"></div>
+      <button class="copy" id="copy" type="button">Copy code</button>
+    </div>
+
+    <a class="cta" id="open" href="#">Open in ProxI</a>
+    <a class="ghost" id="get" href="./">Don't have ProxI yet? Get it</a>
+
+    <ol class="steps">
+      <li><b>1</b><span><strong>Get ProxI</strong> on your iPhone and create your account.</span></li>
+      <li><b>2</b><span>Come back here and tap <strong>Open in ProxI</strong>, or tap <strong>Join with a code</strong> in the app and enter the code above.</span></li>
+    </ol>
+  </section>
+
+  <section id="missing" hidden>
+    <h1>This invite link isn't complete</h1>
+    <div class="bad">
+      <p>Ask whoever sent it for their group's six-character code, then tap <strong>Join with a code</strong> in ProxI.</p>
+    </div>
+    <p style="margin-top:20px"><a class="ghost" href="./">What is ProxI?</a></p>
+  </section>
+
+  <footer>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="support.html">Support</a>
+  </footer>
+</main>
+
+<script>
+  // Same launch switch as the landing page. Paste the App Store or public
+  // TestFlight link here and "Get it" goes straight there.
+  const APP_STORE_URL = '';
+
+  // The alphabet generate_invite_code() uses (0001): no 0, O, 1, I or L.
+  const CODE = /^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{6}$/;
+
+  const raw = new URLSearchParams(window.location.search).get('code') || '';
+  const code = raw.trim().toUpperCase();
+
+  if (CODE.test(code)) {
+    document.getElementById('invite').hidden = false;
+    document.getElementById('code').textContent = code;
+    document.getElementById('open').href = 'proxi://join/' + code;
+    if (APP_STORE_URL) document.getElementById('get').href = APP_STORE_URL;
+
+    const copy = document.getElementById('copy');
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(code);
+        copy.textContent = 'Copied';
+      } catch (e) {
+        copy.textContent = 'Press and hold the code to copy';
+      }
+    });
+  } else {
+    document.getElementById('missing').hidden = false;
+  }
+</script>
+</body>
+</html>
