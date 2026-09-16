@@ -24,6 +24,7 @@
 <ul>
   <li><strong>Email address</strong>: required to create an account, used for login and account-related communication (e.g., password reset, email confirmation). Collected and authenticated by our backend provider, Supabase (see Section 4).</li>
   <li><strong>Password</strong>: never stored or seen by us in plain text. It is hashed and managed entirely by Supabase Auth.</li>
+  <li><strong>Date of birth</strong>: required to create an account. We use it only to check that you meet the minimum age in Section 1 and, in future, to decide whether a feature is appropriate for your age. It is stored separately from your profile, in a table no other user of the App can read by any route, and it is <strong>never shown on your profile, never shown to your friends or group, and never shared with anyone outside the providers in Section 4</strong>. It cannot be changed in the App once set; if you entered it wrongly, contact us at the address in Section 9.</li>
 </ul>
 <h3>Profile information</h3>
 <ul>
@@ -46,8 +47,12 @@
   <li><strong>Daily proof posts</strong>: photos, videos, or notes you post to your accountability group, plus timestamps and whether a post landed on time or late</li>
   <li><strong>Forfeit and dispute records</strong>: what you owe, dispute reasons you write, and your votes on other members' disputes. Votes are stored per member but are only ever readable by the member who cast them. The App and other members only ever see the aggregate count, never who voted which way</li>
   <li><strong>Plans</strong>: plans you create, including &quot;I'm free now,&quot; with an optional title and place, a start and end time, and who the plan is for (your friends, your group, or only people you invite); who you invited; and which plans you have joined</li>
+  <li><strong>Messages on a plan</strong>: the text you write in the message thread attached to a plan, and when you wrote it. These are not private messages between two people in general: a thread belongs to one plan, everyone who can see that plan can read it, and it is deleted along with the plan (see Section 5). There is no inbox and no way to message someone you have no plan with</li>
   <li><strong>Friends</strong>: friend requests you send and receive, who you are friends with, and whether you met online or in person</li>
   <li><strong>&quot;Tell me when they're free&quot; choices</strong>: which friends you asked to be notified about. That friend is not told</li>
+  <li><strong>&quot;I'd like to see them&quot; choices</strong>: friends you privately mark as someone you would like to see, and when you did. <strong>That friend is not told, ever, unless they mark you too</strong> — only then are you both told, at the same moment. Nobody is ever shown that you marked them if they did not mark you back, and the App never tells anyone how many people have marked them</li>
+  <li><strong>&quot;When I am free&quot; answers after meeting someone in person</strong>: the time window you give when the App asks, after you add a friend by trading codes. It is not shown to them unless they answer too</li>
+  <li><strong>&quot;Do this again&quot; choices</strong>: after a plan with friends, the App may offer to repeat it. We keep which of those offers you put away, and whether you have switched the offers off. Nobody else is told either</li>
   <li><strong>Reports</strong> you file: what you reported, the category you chose, and the reason you wrote</li>
   <li><strong>Streak and attendance counters</strong> derived automatically from the above</li>
 </ul>
@@ -60,6 +65,7 @@
   <li><strong>A record of each notification sent to you</strong>: its title, its text, what it was about, and whether it was delivered. We keep this so the App never sends the same notification twice, keeps to its daily limits and quiet hours, and can stop sending to a phone the App has been removed from</li>
 </ul>
 <p>Nothing is sent to your phone unless you have allowed notifications in iOS, and each kind can be turned off in the App's notification settings.</p>
+<p>Some notifications carry content you or another member wrote, so that the notification says something useful rather than &quot;you have a new message&quot;. A notification about a message on a plan includes the start of that message, and one about a plan includes its title and time. This means that text passes through Apple's and Expo's notification delivery services on its way to the phone, in the same way the rest of the notification does. If you would rather that did not happen, turn off the &quot;Plans&quot; notification switch in the App.</p>
 <h3>Time zone</h3>
 <p>Your group's time zone decides when its daily proof window opens and closes. Your phone's time zone, if you turn on notifications, decides your quiet hours.</p>
 <h3>Photos, your camera and your photo library</h3>
@@ -96,6 +102,15 @@
 <p>Everything below is enforced by database-level access rules, not just by the App's screens. If you block someone, or they block you, neither of you sees anything of the other's described here.</p>
 <p><strong>Members of your accountability group</strong> see the group content the App is designed to show them: your name, traits and activities, proof posts, dispute reasons, and forfeit status. That visibility is the core of how the App works, not a third-party disclosure, and it is scoped to your group.</p>
 <p><strong>Friends</strong> are separate from your group. Someone you have accepted as a friend sees your name, username, avatar, how and when you became friends, your current streak number, and whether you have posted today. They also see the parts of your profile you share with friends. They do <strong>not</strong> see your proof photos or videos, your proof notes, your goal description or reflection, which group you are in, or anything about your forfeits or disputes.</p>
+<p><strong>People on a plan with you</strong> can read the messages on that plan, and so can anyone else who can see the plan. Who that is depends on the plan: your friends, your group, or only the people you invited. Nobody outside that can read them.</p>
+<p><strong>Nobody is told what you keep to yourself.</strong> Three things you can do in the App are stored but deliberately never revealed:</p>
+<ul>
+  <li>Marking a friend as someone you would like to see. They are told only if they mark you too, and then you are both told at once. If they never do, they are never told anything, and the App does not tell them, or anyone, that somebody marked them.</li>
+  <li>Saying when you are free after meeting someone in person. It is shared only if they answer too.</li>
+  <li>Asking to be told when a friend posts free time.</li>
+</ul>
+<p>In each case the App cannot tell the difference between someone who has not looked and someone who chose not to answer, and it never reports either as a refusal.</p>
+<p><strong>Your date of birth is not visible to anyone using the App</strong>, including your friends, your group and anyone whose profile you appear on.</p>
 <p><strong>Your profile</strong> has three parts, and you choose who sees each one in Edit Profile: your traits and activities, your goal posts, and your other posts. Each can be set to:</p>
 <ul>
   <li><strong>Friends</strong> (the default): people you have added as friends</li>
@@ -110,6 +125,10 @@
 <p>We keep your data for as long as your account is active, except:</p>
 <ul>
   <li><strong>Plans</strong> are deleted once they are more than 30 days old.</li>
+  <li><strong>Messages on a plan</strong> are deleted with that plan, so they go the same way 30 days after it. You cannot write to a thread once the plan has finished. Neither you nor anyone else can delete an individual message: a message that could be deleted could not be reported afterwards, and Section 5 of the Terms commits us to acting on reports.</li>
+  <li><strong>&quot;I'd like to see them&quot; marks</strong> are deleted the moment you turn one off, and automatically if you stop being friends or either of you blocks the other.</li>
+  <li><strong>&quot;When I am free&quot; answers after meeting someone in person</strong> are deleted 60 days after you give them, and straight away if you stop being friends or either of you blocks the other, unless a plan was already made from them.</li>
+  <li><strong>&quot;Do this again&quot; offers you put away</strong> are deleted along with the plan they were about. Whether you have switched the offers off is kept until you change it or delete your account.</li>
   <li><strong>Records of notifications sent to you</strong> are deleted after 30 days.</li>
   <li><strong>Your push token</strong> is removed when you sign out on that phone or delete your account, and is no longer used once Expo reports that the App has been removed from that phone.</li>
   <li><strong>A profile post you delete</strong> disappears for everyone straight away, and its photo is deleted from storage. Its text is kept, hidden, so a report about it can still be reviewed, until you delete your account.</li>
