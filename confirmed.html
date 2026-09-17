@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email confirmed · ProxI</title>
+<meta name="description" content="Your ProxI email address is confirmed.">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+/* Where the link in a confirmation email lands. Supabase sends people to the
+   project's Site URL after confirming, which used to be a page with nothing
+   on it. This one says it worked and sends them back to the app.
+
+   Supabase adds the result to the address: tokens or a code when it worked,
+   error details when it did not (most often an expired or already used
+   link). The page never uses the tokens. It only checks for an error, then
+   wipes the address so nothing sensitive stays in the history. */
+
+:root {
+  --green-dark: #1B4332;
+  --green-mid: #2D6A4F;
+  --green-light: #D6E4DB;
+  --honey-mid: #E3B23C;
+  --honey-light: #F7EED4;
+  --amber-text: #7A5F1E;
+  --ink: #14241B;
+  --muted: #5E6A62;
+  --muted-light: #8A958E;
+  --bg: #EEF4EF;
+  --surface: #FFFFFF;
+  --hairline: rgba(20, 36, 27, .10);
+  --cta-bg: #1B4332;
+  --cta-text: #FFFFFF;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --green-mid: #7FC4A0;
+    --green-light: #1D3A2A;
+    --honey-light: #33290F;
+    --amber-text: #E3B23C;
+    --ink: #E8F0EA;
+    --muted: #A3B1A8;
+    --muted-light: #7D8C82;
+    --bg: #0E1F16;
+    --surface: #16311F;
+    --hairline: rgba(232, 240, 234, .12);
+    --cta-bg: #7FC4A0;
+    --cta-text: #0E1F16;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--muted);
+  font-family: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 48px;
+}
+main { width: 100%; max-width: 440px; text-align: center; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-family: "Fraunces", Georgia, serif; font-weight: 700; font-size: 22px; }
+.brand img { width: 34px; height: 34px; border-radius: 9px; }
+.card { margin-top: 34px; background: var(--surface); border-radius: 28px; padding: 36px 24px 28px; box-shadow: inset 0 0 0 1px var(--hairline); }
+.mark { width: 84px; height: 84px; margin: 0 auto; border-radius: 50%; display: grid; place-items: center; background: var(--green-light); color: var(--green-mid); }
+.mark.warn { background: var(--honey-light); color: var(--amber-text); }
+.mark svg { width: 42px; height: 42px; }
+.mark path { stroke-dasharray: 40; stroke-dashoffset: 40; animation: draw .5s .15s ease-out forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .mark path { animation: none; stroke-dashoffset: 0; } }
+h1 { margin: 22px 0 10px; font-family: "Fraunces", Georgia, serif; font-weight: 700; color: var(--ink); font-size: clamp(28px, 8vw, 34px); line-height: 1.12; text-wrap: balance; }
+.lede { margin: 0 auto 24px; max-width: 340px; font-size: 16px; }
+.cta { display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px 22px; border-radius: 999px; background: var(--cta-bg); color: var(--cta-text); font-weight: 800; font-size: 16px; text-decoration: none; }
+.hint { margin: 14px 0 0; font-size: 13.5px; color: var(--muted-light); }
+footer { margin-top: 34px; font-size: 13px; }
+footer a { color: var(--muted); margin: 0 8px; }
+a:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 3px; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <a class="brand" href="./"><img src="icon.png" alt="" width="34" height="34">ProxI</a>
+
+  <section class="card" id="ok">
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+    </div>
+    <h1>Email confirmed</h1>
+    <p class="lede">You're all set. Go back to ProxI and log in with your email and password.</p>
+    <a class="cta" href="proxi://">Open ProxI</a>
+    <p class="hint">On a computer? Just open ProxI on your phone.</p>
+  </section>
+
+  <section class="card" id="failed" hidden>
+    <div class="mark warn" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 7v6M12 17h.01"/></svg>
+    </div>
+    <h1>This link didn't work</h1>
+    <p class="lede">It may have expired or already been used. If you already confirmed, you can log in now. If not, email us and we'll sort it out.</p>
+    <a class="cta" href="proxi://">Open ProxI</a>
+    <p class="hint">Still stuck? <a href="support.html" style="color:inherit">Get help</a></p>
+  </section>
+
+  <footer>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="support.html">Support</a>
+  </footer>
+</main>
+
+<script>
+  const query = new URLSearchParams(window.location.search);
+  const hash = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+  const failed = query.has('error') || query.has('error_code') || hash.has('error') || hash.has('error_code');
+
+  if (failed) {
+    document.getElementById('ok').hidden = true;
+    document.getElementById('failed').hidden = false;
+    document.title = "Link didn't work · ProxI";
+  }
+
+  // Drop tokens and codes from the address bar and history.
+  if (window.location.search || window.location.hash) {
+    history.replaceState(null, '', window.location.pathname);
+  }
+</script>
+</body>
+</html>
