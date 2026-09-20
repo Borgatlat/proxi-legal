@@ -311,6 +311,81 @@ p { margin: 0; }
 .m-chip.go { background: #2A6A88; color: #fff; }
 .m-off { margin-top: 6px; font-size: 10px; font-weight: 600; color: #98A29B; }
 
+/* ---------- motion ----------
+   Everything marked data-reveal starts a little low and faded and settles
+   as it comes into view, once each. The rules only apply when the page's
+   own script is running (html.js), so with JavaScript off, or if the script
+   fails, every section is simply visible. Reduce Motion turns it all off. */
+
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .75s cubic-bezier(.2, .7, .3, 1), transform .75s cubic-bezier(.2, .7, .3, 1);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+html.js [data-reveal].in { opacity: 1; transform: none; }
+
+/* The hero phone arrives with a touch more travel and a moment later, so
+   the words are read first. */
+html.js .phone-stage[data-reveal] { transform: translateY(28px) scale(.985); }
+html.js .phone-stage[data-reveal].in { transform: none; }
+
+/* The two labels beside the phone drift, the way they would if they were
+   floating above it. Decorative only. */
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+.float.one { animation: bob 5.5s ease-in-out infinite; }
+.float.two { animation: bob 6.5s ease-in-out .8s infinite; }
+
+.step, .feature, .half, .promise, .shot {
+  transition: transform .35s cubic-bezier(.2, .7, .3, 1), box-shadow .35s cubic-bezier(.2, .7, .3, 1);
+}
+@media (hover: hover) {
+  .step:hover, .feature:hover, .half:hover, .promise:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 2px 4px rgba(20, 36, 27, .05), 0 18px 40px rgba(20, 36, 27, .11);
+  }
+  .shot:hover { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .float.one, .float.two { animation: none; }
+  .step, .feature, .half, .promise, .shot { transition: none; }
+  @media (hover: hover) {
+    .step:hover, .feature:hover, .half:hover, .promise:hover, .shot:hover { transform: none; }
+  }
+}
+
+/* ---------- screenshots ----------
+   Real screens from the app. The phones scale with the page: three across
+   on a desktop, two on a tablet, one on a phone, and the frame is sized in
+   vw so the picture inside is never blown up past its own pixels. */
+
+.shots {
+  display: grid;
+  max-width: 780px;
+  margin: 0 auto;
+  gap: 26px 20px;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  justify-items: center;
+}
+.shot { width: 100%; max-width: clamp(200px, 58vw, 264px); text-align: center; }
+.shot .frame {
+  background: #0E1F16;
+  border-radius: clamp(30px, 4.4vw, 42px);
+  padding: clamp(6px, .8vw, 9px);
+  box-shadow: 0 24px 50px rgba(20, 36, 27, .2), 0 2px 6px rgba(20, 36, 27, .1);
+}
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: clamp(24px, 3.7vw, 34px);
+}
+.shot figcaption { margin-top: 14px; font-size: 14.5px; color: var(--muted); }
+.shot figcaption b { display: block; color: var(--ink); font-size: 15.5px; }
+
 /* ---------- sections ---------- */
 
 section.block { padding: 88px 0 0; }
@@ -579,27 +654,27 @@ footer { padding: 40px 0 48px; font-size: 14px; }
     <!-- ============ HERO ============ -->
     <section class="hero">
       <div>
-        <span class="eyebrow">For you and the friends you actually know</span>
-        <h1>Stop scrolling past your friends. <em>Start seeing them.</em></h1>
-        <p class="lede">
+        <span class="eyebrow" data-reveal>For you and the friends you actually know</span>
+        <h1 data-reveal style="--reveal-delay:.08s">Stop scrolling past your friends. <em>Start seeing them.</em></h1>
+        <p class="lede" data-reveal style="--reveal-delay:.16s">
           ProxI turns your friends into a small group that <strong>keeps each other going</strong>,
           and turns "we should hang out sometime" into <strong>a real plan</strong>.
         </p>
-        <div class="actions" id="hero-actions">
+        <div class="actions" id="hero-actions" data-reveal style="--reveal-delay:.24s">
           <a class="cta" data-cta href="mailto:lucasborgarello@icloud.com?subject=ProxI%20early%20access&amp;body=I%27d%20like%20to%20try%20ProxI%20when%20it%20launches.">
             <span data-cta-label>Get early access</span>
           </a>
           <a class="ghost" href="#how">See how it works</a>
         </div>
         <p class="beta-note" data-beta-note hidden>Free while it is in beta. Opens in TestFlight, Apple's app for trying apps early.</p>
-        <div class="reassure">
+        <div class="reassure" data-reveal style="--reveal-delay:.32s">
           <span>Made for iPhone</span>
           <span>No ads</span>
           <span>No subscriptions</span>
         </div>
       </div>
 
-      <div class="phone-stage">
+      <div class="phone-stage" data-reveal style="--reveal-delay:.2s">
         <div class="phone" role="img" aria-label="The ProxI Friends tab, showing that you and Jamie both want to catch up, and asking whether to go swimming with Sam again.">
           <div class="float one" aria-hidden="true"><i style="background:#C68B12">14</i>Day 14 streak</div>
           <div class="float two" aria-hidden="true"><i style="background:#2A6A88">J</i>Jamie is free now</div>
@@ -636,7 +711,7 @@ footer { padding: 40px 0 48px; font-size: 14px; }
     </section>
 
     <!-- ============ PROBLEM ============ -->
-    <section class="problem" aria-labelledby="problem-title">
+    <section class="problem" aria-labelledby="problem-title" data-reveal>
       <span class="eyebrow">Sound familiar?</span>
       <h2 id="problem-title">You see your friends' posts every day. You see your friends a few times a year.</h2>
       <p>
@@ -648,37 +723,57 @@ footer { padding: 40px 0 48px; font-size: 14px; }
 
     <!-- ============ STEPS ============ -->
     <section class="block" id="how" aria-labelledby="how-title">
-      <div class="section-head center">
+      <div class="section-head center" data-reveal>
         <span class="eyebrow">How it works</span>
         <h2 id="how-title">Three steps from "we should" to "see you there".</h2>
       </div>
 
       <div class="steps">
-        <article class="step">
+        <article class="step" data-reveal>
           <h3>Bring your people</h3>
           <p>Start a group and share its invite code, or add friends in person by trading a code on your phones.</p>
         </article>
-        <article class="step">
+        <article class="step" data-reveal style="--reveal-delay:0.08s">
           <h3>Show up for each other</h3>
           <p>Post proof of what you did each day. Miss it, and you owe the small forfeit your group picked.</p>
         </article>
-        <article class="step">
+        <article class="step" data-reveal style="--reveal-delay:0.16s">
           <h3>Actually meet up</h3>
           <p>Tap "I'm free now" or pick a time. ProxI helps the plan happen, even when nobody wants to ask first.</p>
         </article>
       </div>
     </section>
 
+    <!-- ============ SCREENSHOTS ============ -->
+    <section class="block" id="look" aria-labelledby="look-title">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">A look inside</span>
+        <h2 id="look-title">Plain screens. Nothing to learn.</h2>
+        <p>Real screenshots from the app, not drawings of it.</p>
+      </div>
+
+      <div class="shots">
+        <figure class="shot" data-reveal>
+          <div class="frame"><img src="shots/welcome.webp" width="620" height="1341" loading="lazy" decoding="async" alt="The ProxI welcome screen: Stop scrolling past your friends, start seeing them, with a button to create an account."></div>
+          <figcaption><b>Start in about a minute</b>No ads, and you choose who sees your profile.</figcaption>
+        </figure>
+        <figure class="shot" data-reveal style="--reveal-delay:.1s">
+          <div class="frame"><img src="shots/plan.webp" width="620" height="1344" loading="lazy" decoding="async" alt="The Post a plan screen, choosing a day, a time of day, a place, and who can see the plan."></div>
+          <figcaption><b>Post a plan in a few taps</b>Or leave it blank to just say you are free.</figcaption>
+        </figure>
+      </div>
+    </section>
+
     <!-- ============ TWO HALVES ============ -->
     <section class="block" aria-labelledby="halves-title">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
         <span class="eyebrow">Everything inside</span>
         <h2 id="halves-title">A group that keeps you going. Friends you actually see.</h2>
         <p>Two halves of one app, with the same people in both.</p>
       </div>
 
       <div class="halves">
-        <article class="half">
+        <article class="half" data-reveal>
           <span class="tag">Your group</span>
           <h3>Stick with it, because your friends are watching.</h3>
           <ul class="ticks">
@@ -690,7 +785,7 @@ footer { padding: 40px 0 48px; font-size: 14px; }
           </ul>
         </article>
 
-        <article class="half friends">
+        <article class="half friends" data-reveal style="--reveal-delay:0.08s">
           <span class="tag">Your friends</span>
           <h3>Make plans that turn into real time together.</h3>
           <ul class="ticks">
@@ -706,14 +801,14 @@ footer { padding: 40px 0 48px; font-size: 14px; }
 
     <!-- ============ FEATURES ============ -->
     <section class="block" aria-labelledby="first-title">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
         <span class="eyebrow">No more awkward first move</span>
         <h2 id="first-title">Never be the one left hanging.</h2>
         <p>The hardest part of seeing a friend is asking first. ProxI makes asking cost nothing, and it never shows you as the one who reached out and was not met.</p>
       </div>
 
       <div class="features">
-        <article class="feature">
+        <article class="feature" data-reveal>
           <span class="eyebrow">Mutual</span>
           <h3>Want to see someone? Say it privately.</h3>
           <p>Mark a friend you would like to see. They only find out if they mark you too, and then you are both told at the same moment.</p>
@@ -731,7 +826,7 @@ footer { padding: 40px 0 48px; font-size: 14px; }
           </div>
         </article>
 
-        <article class="feature">
+        <article class="feature" data-reveal style="--reveal-delay:0.08s">
           <span class="eyebrow">Just met</span>
           <h3>Met someone great? It asks you both.</h3>
           <p>After you add someone in person, ProxI privately asks each of you when you are free. A plan appears only when both of you answer.</p>
@@ -748,7 +843,7 @@ footer { padding: 40px 0 48px; font-size: 14px; }
           </div>
         </article>
 
-        <article class="feature">
+        <article class="feature" data-reveal>
           <span class="eyebrow">Shared activities</span>
           <h3>Never stare at a blank message again.</h3>
           <p>On a friend's profile, the things you both love stand out. Tap one and the plan already knows what it is for.</p>
@@ -764,7 +859,7 @@ footer { padding: 40px 0 48px; font-size: 14px; }
           </div>
         </article>
 
-        <article class="feature">
+        <article class="feature" data-reveal style="--reveal-delay:0.08s">
           <span class="eyebrow">Do this again</span>
           <h3>Had a great time? Do it again.</h3>
           <p>After a plan, the people who went get one easy offer to repeat it with the same people. One tap to pick a time.</p>
@@ -782,7 +877,7 @@ footer { padding: 40px 0 48px; font-size: 14px; }
         </article>
       </div>
 
-      <div class="midcta">
+      <div class="midcta" data-reveal>
         <p>Your friends are one tap away from a plan.</p>
         <a class="cta" data-cta href="mailto:lucasborgarello@icloud.com?subject=ProxI%20early%20access&amp;body=I%27d%20like%20to%20try%20ProxI%20when%20it%20launches."><span data-cta-label>Get early access</span></a>
       </div>
@@ -790,34 +885,34 @@ footer { padding: 40px 0 48px; font-size: 14px; }
 
     <!-- ============ PRIVACY ============ -->
     <section class="block" id="privacy" aria-labelledby="privacy-title">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
         <span class="eyebrow">Privacy</span>
         <h2 id="privacy-title">Your friends, not an audience.</h2>
         <p>ProxI is for people you know, so it is built to show as little as possible and never more than you chose.</p>
       </div>
 
       <div class="privacy">
-        <div class="promise">
+        <div class="promise" data-reveal>
           <h3>No ads, ever</h3>
           <p>No advertising, no ad identifiers, and your data is never sold.</p>
         </div>
-        <div class="promise">
+        <div class="promise" data-reveal style="--reveal-delay:0.08s">
           <h3>No analytics or tracking</h3>
           <p>No analytics or crash-tracking SDKs watching how you use the app.</p>
         </div>
-        <div class="promise">
+        <div class="promise" data-reveal style="--reveal-delay:0.16s">
           <h3>You choose who sees what</h3>
           <p>Show each part of your profile to everyone, to friends, or only to you.</p>
         </div>
-        <div class="promise">
+        <div class="promise" data-reveal>
           <h3>Report and block anything</h3>
           <p>Every post, plan, message and profile can be reported, and reports are reviewed within 24 hours.</p>
         </div>
-        <div class="promise">
+        <div class="promise" data-reveal style="--reveal-delay:0.08s">
           <h3>Your birthday stays yours</h3>
           <p>We check your age at sign-up, and your date of birth is never shown to anyone.</p>
         </div>
-        <div class="promise">
+        <div class="promise" data-reveal style="--reveal-delay:0.16s">
           <h3>Leave anytime</h3>
           <p>Delete your account from inside the app, and your login, profile and photos go with it.</p>
         </div>
@@ -826,12 +921,12 @@ footer { padding: 40px 0 48px; font-size: 14px; }
 
     <!-- ============ FAQ ============ -->
     <section class="block" id="faq" aria-labelledby="faq-title">
-      <div class="section-head center">
+      <div class="section-head center" data-reveal>
         <span class="eyebrow">Questions</span>
         <h2 id="faq-title">Good to know.</h2>
       </div>
 
-      <div class="faq">
+      <div class="faq" data-reveal>
         <details>
           <summary>Do my friends need ProxI too?</summary>
           <p>Yes, and that is the point. ProxI is built for people you already know, so it gets better with every friend you bring. Start a group and share its invite code, or trade codes in person.</p>
@@ -860,7 +955,7 @@ footer { padding: 40px 0 48px; font-size: 14px; }
     </section>
 
     <!-- ============ CLOSING ============ -->
-    <section class="closing" id="get" aria-labelledby="closing-title">
+    <section class="closing" id="get" aria-labelledby="closing-title" data-reveal>
       <img src="icon.png" alt="The ProxI app icon" width="76" height="76">
       <h2 id="closing-title">Your friends are closer than your feed.</h2>
       <p>Bring the people you care about into one small app, and start seeing them again.</p>
@@ -923,6 +1018,54 @@ footer { padding: 40px 0 48px; font-size: 14px; }
     });
     // Says what TestFlight is, so the extra step is not a surprise.
     if (isBeta) document.querySelectorAll('[data-beta-note]').forEach((el) => { el.hidden = false; });
+  }
+
+  // ============================================================
+  // Reveal on scroll. One observer for the whole page; each element is let
+  // go once it has arrived, so nothing keeps running as you read. The html.js
+  // class is what turns the hiding rules on, and it is set here rather than
+  // in the markup so a page whose script never runs still shows everything.
+  // ============================================================
+  const reveals = document.querySelectorAll('[data-reveal]');
+  const stillMoving = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (stillMoving && 'IntersectionObserver' in window && reveals.length) {
+    document.documentElement.classList.add('js');
+
+    const seen = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in');
+        seen.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+    reveals.forEach((el) => seen.observe(el));
+
+    // Anything already on screen at load (the hero) settles straight away,
+    // on the next frame so the browser has something to animate from.
+    requestAnimationFrame(() => {
+      reveals.forEach((el) => {
+        const box = el.getBoundingClientRect();
+        if (box.top < window.innerHeight * 0.92) {
+          el.classList.add('in');
+          seen.unobserve(el);
+        }
+      });
+    });
+
+    // Safety net. Hiding things until they are scrolled to is only ever a
+    // nicety, and a browser that never reports them (a zero-height window,
+    // an embedded preview, an observer that does not fire) must not be left
+    // with a blank page. After a few seconds everything is shown whatever
+    // happened.
+    setTimeout(() => {
+      reveals.forEach((el) => {
+        if (el.classList.contains('in')) return;
+        el.classList.add('in');
+        seen.unobserve(el);
+      });
+    }, 4000);
   }
 
   // The phone-only bar appears once the hero button has scrolled out of view,
