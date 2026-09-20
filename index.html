@@ -444,6 +444,8 @@ section.block { padding: 88px 0 0; }
 .badge.shared { border-color: #79B0D0; background: #79B0D0; color: #14241B; font-weight: 700; }
 .demo-line { margin-top: 10px; font-size: 11.5px; }
 
+.beta-note { margin: 14px 0 0; font-size: 13.5px; color: var(--muted-light); }
+.closing .beta-note { font-size: 13.5px; color: rgba(255, 255, 255, .75); }
 .midcta { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 18px; text-align: center; }
 .midcta p { font-size: 15px; font-weight: 600; color: var(--ink); }
 
@@ -589,6 +591,7 @@ footer { padding: 40px 0 48px; font-size: 14px; }
           </a>
           <a class="ghost" href="#how">See how it works</a>
         </div>
+        <p class="beta-note" data-beta-note hidden>Free while it is in beta. Opens in TestFlight, Apple's app for trying apps early.</p>
         <div class="reassure">
           <span>Made for iPhone</span>
           <span>No ads</span>
@@ -851,7 +854,7 @@ footer { padding: 40px 0 48px; font-size: 14px; }
         </details>
         <details>
           <summary>Can I use it on Android?</summary>
-          <p>ProxI is launching on iPhone first. Get early access and we will let you know about other devices.</p>
+          <p>ProxI is on iPhone first. The beta runs through TestFlight, and we will let you know about other devices.</p>
         </details>
       </div>
     </section>
@@ -862,6 +865,7 @@ footer { padding: 40px 0 48px; font-size: 14px; }
       <h2 id="closing-title">Your friends are closer than your feed.</h2>
       <p>Bring the people you care about into one small app, and start seeing them again.</p>
       <a class="cta" data-cta href="mailto:lucasborgarello@icloud.com?subject=ProxI%20early%20access&amp;body=I%27d%20like%20to%20try%20ProxI%20when%20it%20launches."><span data-cta-label>Get early access</span></a>
+      <p class="beta-note" data-beta-note hidden>Free while it is in beta. Opens in TestFlight, Apple's app for trying apps early.</p>
       <div class="reassure">
         <span>Made for iPhone</span>
         <span>No ads</span>
@@ -897,12 +901,14 @@ footer { padding: 40px 0 48px; font-size: 14px; }
 <script>
   // ============================================================
   // Launch switch. Everything that asks someone to get the app reads this.
-  // Paste the App Store link here once ProxI is live (a public TestFlight
-  // link works too), and every button on the page becomes a download button.
-  // Left empty, the buttons ask for early access by email, which works with
-  // no server and nothing stored by this page.
+  // It holds the public TestFlight link while ProxI is in beta; swap it for
+  // the App Store link on release day and the buttons say "Download on
+  // iPhone" instead, with the TestFlight note taken away. Left empty, the
+  // buttons go back to asking for early access by email.
   // ============================================================
-  const APP_STORE_URL = '';
+  const APP_STORE_URL = 'https://testflight.apple.com/join/BNqWKSap';
+
+  const isBeta = APP_STORE_URL.includes('testflight.apple.com');
 
   if (APP_STORE_URL) {
     document.querySelectorAll('[data-cta]').forEach((el) => {
@@ -910,10 +916,13 @@ footer { padding: 40px 0 48px; font-size: 14px; }
       el.target = '_blank';
       el.rel = 'noopener';
       const label = el.querySelector('[data-cta-label]');
-      const text = 'Download on iPhone';
-      if (label) label.textContent = text;
-      else el.textContent = el.hasAttribute('data-cta-short') ? 'Download' : text;
+      const text = isBeta ? 'Get the beta on TestFlight' : 'Download on iPhone';
+      const short = isBeta ? 'Get the beta' : 'Download';
+      if (label) label.textContent = el.hasAttribute('data-cta-short') ? short : text;
+      else el.textContent = el.hasAttribute('data-cta-short') ? short : text;
     });
+    // Says what TestFlight is, so the extra step is not a surprise.
+    if (isBeta) document.querySelectorAll('[data-beta-note]').forEach((el) => { el.hidden = false; });
   }
 
   // The phone-only bar appears once the hero button has scrolled out of view,

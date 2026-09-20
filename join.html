@@ -125,9 +125,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--green-mid); out
 </main>
 
 <script>
-  // Same launch switch as the landing page. Paste the App Store or public
-  // TestFlight link here and "Get it" goes straight there.
-  const APP_STORE_URL = '';
+  // Same launch switch as the landing page: the public TestFlight link
+  // while ProxI is in beta, the App Store link after that. "Get it" goes
+  // straight there instead of to the landing page.
+  const APP_STORE_URL = 'https://testflight.apple.com/join/BNqWKSap';
 
   // The alphabet generate_invite_code() uses (0001): no 0, O, 1, I or L.
   const CODE = /^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{6}$/;
