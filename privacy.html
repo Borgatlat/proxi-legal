@@ -15,7 +15,7 @@
 <main class="page">
 <a class="back" href="index.html">&larr; ProxI</a>
 <h1>ProxI Privacy Policy</h1>
-<p><strong>Last updated: September 21, 2026</strong></p>
+<p><strong>Last updated: September 26, 2026</strong></p>
 <p>This policy describes what ProxI (&quot;the App,&quot; &quot;we,&quot; &quot;us&quot;) collects, why, and who it is shared with.</p>
 <p>ProxI is operated by <strong>BetterU LLC</strong> (&quot;we,&quot; &quot;us,&quot; &quot;our&quot;). If you have questions about this policy or your data, contact us at <strong>lucasborgarello@icloud.com</strong>.</p>
 <h2>1. Who this applies to</h2>
@@ -26,7 +26,9 @@
   <li><strong>Email address</strong>: required to create an account, used for login and account-related communication (e.g., password reset, email confirmation). Collected and authenticated by our backend provider, Supabase (see Section 4).</li>
   <li><strong>Password</strong>: never stored or seen by us in plain text. It is hashed and managed entirely by Supabase Auth.</li>
   <li><strong>When you agreed to these terms</strong>: the date and time you accepted the Terms of Service and this Privacy Policy, and which version you accepted, kept as a record that you did.</li>
-  <li><strong>Date of birth</strong>: required to create an account. We use it only to check that you meet the minimum age in Section 1. It is stored separately from your profile, in a table no other user of the App can read by any route, and it is <strong>never shown on your profile, never shown to your friends or group, and never shared with anyone outside the providers in Section 4</strong>. It cannot be changed in the App once set; if you entered it wrongly, contact us at the address in Section 9.</li>
+  <li><strong>Age confirmation</strong>: when you create an account you confirm that you are at least the minimum age in Section 1, and we keep the date and time you confirmed it. We no longer ask for your date of birth.</li>
+  <li><strong>Date of birth, for older accounts only</strong>: accounts created before September 26, 2026 gave a date of birth instead, which we used only to check the minimum age. It is stored separately from your profile, in a table no other user of the App can read by any route, and it is <strong>never shown on your profile, never shown to your friends or group, and never shared with anyone outside the providers in Section 4</strong>. To have it deleted, contact us at the address in Section 9.</li>
+  <li><strong>Phone number (optional)</strong>: only if you add one in Settings. We text you a code to confirm it is yours, and it is used for one thing: letting friends who have your number in their contacts find you on ProxI. It is <strong>never shown on your profile or to anyone in the App</strong>. You can turn off &quot;Let people with my number find me&quot; at any time, and nobody can then find you by it.</li>
 </ul>
 <h3>Profile information</h3>
 <ul>
@@ -46,7 +48,7 @@
 <p>Each post is stored with the date you posted it. Who can see it depends on your profile settings (see Section 4).</p>
 <h3>Content you create in the App</h3>
 <ul>
-  <li><strong>Daily proof posts</strong>: photos, videos, or notes you post to your accountability group, plus timestamps and whether a post landed on time or late</li>
+  <li><strong>Daily proof posts</strong> (only in groups with the daily challenge on): photos, videos, or notes you post to that group, plus timestamps and whether a post landed on time or late</li>
   <li><strong>Forfeit and dispute records</strong>: what you owe, dispute reasons you write, and your votes on other members' disputes. Votes are stored per member but are only ever readable by the member who cast them. The App and other members only ever see the aggregate count, never who voted which way</li>
   <li><strong>Plans</strong>: plans you create, including &quot;I'm free now,&quot; with an optional title and place, a start and end time, and who the plan is for (your friends, your group, or only people you invite); who you invited; which plans you have joined; and, if you host a plan and change its time or place, when you last changed it. Everyone going or invited is told the new time and place</li>
   <li><strong>Messages on a plan</strong>: the text you write in the message thread attached to a plan, and when you wrote it. These are not private messages between two people in general: a thread belongs to one plan, everyone who can see that plan can read it, and it is deleted along with the plan (see Section 5). There is no inbox and no way to message someone you have no plan with</li>
@@ -78,8 +80,11 @@
 <p>Photos you post are uploaded to and stored by Supabase Storage (see Section 4). We do not run face recognition, object recognition, or any other automated analysis on your photos, and we do not strip or read embedded camera metadata.</p>
 <p><strong>Proof photos and videos are stored privately.</strong> The App shows them through links that expire after one hour, and a link is only issued to someone who is in that photo's group and has not been blocked by the person who posted it. Someone who was given a link could open the photo until it expires.</p>
 <p><strong>Profile post photos are stored privately.</strong> The App shows them through links that expire after one hour, and those links are only issued to people your profile settings allow. Someone who was given a link could open the photo until it expires.</p>
+<h3>Your contacts (only if you use &quot;Find friends from your contacts&quot;)</h3>
+<p>If you tap &quot;Find friends from your contacts&quot;, the App asks for permission to read your contacts, and permission can be declined. It then sends the <strong>phone numbers only</strong> (never names, emails or anything else) to our database, which checks which of them belong to ProxI accounts with a confirmed number and the setting above turned on, and sends back just those accounts. <strong>The numbers you send are not stored.</strong> We keep only a count of how many numbers each account checked that day, to stop anyone checking huge lists. Names from your contacts stay on your phone.</p>
+<p>If you tap &quot;Invite&quot; next to a contact who is not on ProxI, the App opens a text message to them in your own Messages app, which you send yourself. We do not send it, and we do not keep their number.</p>
 <h3>What we do <strong>not</strong> collect</h3>
-<p>ProxI does <strong>not</strong> collect your location/GPS, does not access your contacts, does not use advertising identifiers or ad SDKs, does not use analytics or crash-tracking SDKs, and does not process payments (forfeits are informal social arrangements between friends; see the Terms of Service). If any of that changes, this section will be updated first.</p>
+<p>ProxI does <strong>not</strong> collect your location/GPS, does not read your contacts except as described above, does not use advertising identifiers or ad SDKs, does not use analytics or crash-tracking SDKs, and does not process payments (forfeits are informal social arrangements between friends; see the Terms of Service). If any of that changes, this section will be updated first.</p>
 <p>We do not use artificial intelligence or any automated analysis on you or on anything you post, and we do not profile, score or rank people.</p>
 <h2>3. How we use what we collect</h2>
 <ul>
@@ -91,16 +96,17 @@
   <li>We do <strong>not</strong> use your data to serve you ads, and we do not sell your personal information to anyone</li>
 </ul>
 <h2>4. Who your data is shared with</h2>
-<p>We share data with two third-party service providers, plus Apple as the App Store operator and the delivery network for notifications:</p>
+<p>We share data with three third-party service providers, plus Apple as the App Store operator and the delivery network for notifications:</p>
 <ul>
   <li><strong>Supabase, Inc.</strong>: our backend provider. Supabase hosts our database, handles authentication, runs the scheduled jobs that send notifications, and stores essentially all data described in Section 2 on our behalf, in the cloud region we selected when creating our project. This includes <strong>Supabase Storage</strong>, where proof photos and profile post photos are held. Supabase acts as our data processor: it stores the data under our direction and does not use it for its own purposes. See <a href="https://supabase.com/privacy" rel="noopener noreferrer" target="_blank">Supabase's privacy policy</a> for how they handle infrastructure-level data.</li>
   <li><strong>Expo (650 Industries, Inc.)</strong>: our push notification service, used only if you turn notifications on. When a notification is sent to you, we send Expo the push token for your phone and the notification itself: the title and text you will see (which can include a friend's name, a plan's title, or your group's day number) and a few internal identifiers the App uses to open the right screen when you tap it. Expo passes the notification to Apple for delivery and tells us whether it was delivered. We do <strong>not</strong> send Expo your email, password, photos, proof posts, profile posts, or anything else in Section 2. See <a href="https://expo.dev/privacy" rel="noopener noreferrer" target="_blank">Expo's privacy policy</a>.</li>
+  <li><strong>Twilio Inc.</strong>: only if you add a phone number. Supabase uses Twilio to send the text message with your confirmation code, so Twilio receives your phone number and that message. See <a href="https://www.twilio.com/en-us/legal/privacy" rel="noopener noreferrer" target="_blank">Twilio's privacy notice</a>.</li>
   <li><strong>Apple Inc.</strong>: when you download the App through the App Store, Apple, per its own policies, may know that you use the App. If you turn on notifications, Apple's Push Notification service delivers them to your iPhone, and receives your phone's push token and each notification's content from Expo to do so. We do not send Apple any other information described in Section 2. See <a href="https://www.apple.com/legal/privacy/" rel="noopener noreferrer" target="_blank">Apple's privacy policy</a>.</li>
 </ul>
 <p>Accounts are created with an email address and password.</p>
 <h3>Who inside the App sees what</h3>
 <p>Everything below is enforced by database-level access rules, not just by the App's screens. If you block someone, or they block you, neither of you sees anything of the other's described here.</p>
-<p><strong>Members of your accountability group</strong> see the group content the App is designed to show them: your name, traits and activities, proof posts, dispute reasons, and forfeit status. That visibility is the core of how the App works, not a third-party disclosure, and it is scoped to your group.</p>
+<p><strong>Members of your groups</strong> see the group content the App is designed to show them: your name, traits and activities, proof posts, dispute reasons, and forfeit status. That visibility is the core of how the App works, not a third-party disclosure, and it is scoped to your group.</p>
 <p><strong>Friends</strong> are separate from your group. Someone you have accepted as a friend sees your name, username, avatar, how and when you became friends, your current streak number, and whether you have posted today. They also see the parts of your profile you share with friends. They do <strong>not</strong> see your proof photos or videos, your proof notes, your goal description or reflection, which group you are in, or anything about your forfeits or disputes.</p>
 <p><strong>People on a plan with you</strong> can read the messages on that plan, and so can anyone else who can see the plan. Who that is depends on the plan: your friends, your group, or only the people you invited. Nobody outside that can read them.</p>
 <p><strong>Nobody is told what you keep to yourself.</strong> Three things you can do in the App are stored but deliberately never revealed:</p>
@@ -110,7 +116,7 @@
   <li>Asking to be told when a friend posts free time.</li>
 </ul>
 <p>In each case the App cannot tell the difference between someone who has not looked and someone who chose not to answer, and it never reports either as a refusal.</p>
-<p><strong>Your date of birth is not visible to anyone using the App</strong>, including your friends, your group and anyone whose profile you appear on.</p>
+<p><strong>Your age confirmation, and your date of birth if your account has one, are not visible to anyone using the App</strong>, including your friends, your group and anyone whose profile you appear on.</p>
 <p><strong>Your profile</strong> has three parts, and you choose who sees each one in Edit Profile: your traits and activities, your goal posts, and your other posts. Each can be set to:</p>
 <ul>
   <li><strong>Friends</strong> (the default): people you have added as friends</li>

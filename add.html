@@ -3,24 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Join a group on ProxI</title>
-<meta name="description" content="Someone invited you to their group on ProxI.">
+<title>Add me on ProxI</title>
+<meta name="description" content="A friend invited you to ProxI, the app for actually hanging out.">
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="icon.png">
-<meta property="og:title" content="You're invited to a group on ProxI">
-<meta property="og:description" content="Tap to join. You'll need the ProxI app on your iPhone.">
-<meta property="og:image" content="https://borgatlat.github.io/proxi-legal/icon.png">
+<meta property="og:title" content="Add me on ProxI">
+<meta property="og:description" content="The app for actually hanging out with your friends. Free on the App Store.">
+<meta property="og:image" content="https://borgatlat.github.io/proxi-legal/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="apple-itunes-app" content="app-id=6807587839">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Manrope:wght@500;600;700;800&display=swap">
 <style>
-/* The page a group invite link opens. Shared invites used to be proxi://
-   links, which do nothing for anyone who does not have the app yet, and
-   that is exactly who an invite is for. This page works either way: it
-   opens the group in the app, or shows the code and where to get the app.
+/* The page someone's personal invite link opens (0054): add.html?i=TOKEN.
+   Same arrangement as join.html. It opens the invite in the app, or says
+   where to get the app first and to come back and tap again - a link
+   tapped before installing is also remembered by the app once it is opened
+   from here.
 
-   The code is read from the address and only ever shown if it has the exact
-   shape of a real one, and it is written as text, never as HTML. */
+   The token is read from the address and only used if it has the exact
+   shape of a real one. It is never written into the page as HTML. */
 
 :root {
   --green-dark: #1B4332;
@@ -91,28 +94,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--green-mid); out
   <a class="brand" href="./"><img src="icon.png" alt="" width="34" height="34">ProxI</a>
 
   <section id="invite" hidden>
-    <h1>You're invited to a group</h1>
-    <p class="lede">A friend wants you in their group on ProxI, where you keep each other going and actually meet up.</p>
+    <h1>A friend invited you to ProxI</h1>
+    <p class="lede">ProxI is for actually hanging out: see who's free, make plans, and turn "we should hang out" into a real plan.</p>
 
-    <div class="code-card">
-      <div class="code-label">INVITE CODE</div>
-      <div class="code" id="code"></div>
-      <button class="copy" id="copy" type="button">Copy code</button>
-    </div>
-
-    <a class="cta" id="open" href="#">Open in ProxI</a>
-    <a class="ghost" id="get" href="./">Don't have ProxI yet? Get it</a>
+    <a class="cta" id="open" href="#">Add them in ProxI</a>
+    <a class="ghost" id="get" href="https://apps.apple.com/us/app/proxi-make-real-connections/id6807587839">Don't have ProxI yet? Get it free</a>
 
     <ol class="steps">
       <li><b>1</b><span><strong>Get ProxI</strong> on your iPhone and create your account.</span></li>
-      <li><b>2</b><span>Come back here and tap <strong>Open in ProxI</strong>, or tap <strong>Join with a code</strong> in the app and enter the code above.</span></li>
+      <li><b>2</b><span>Come back to this message and tap the link again, then <strong>Add them in ProxI</strong>. You'll be friends in one tap.</span></li>
     </ol>
   </section>
 
   <section id="missing" hidden>
     <h1>This invite link isn't complete</h1>
     <div class="bad">
-      <p>Ask whoever sent it for their group's six-character code, then tap <strong>Join with a code</strong> in ProxI.</p>
+      <p>Ask whoever sent it to send their invite link again, from <strong>Add someone</strong> in ProxI.</p>
     </div>
     <p style="margin-top:20px"><a class="ghost" href="./">What is ProxI?</a></p>
   </section>
@@ -125,30 +122,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--green-mid); out
 </main>
 
 <script>
-  // "Get it" goes straight to the App Store instead of to the landing page.
-  const APP_STORE_URL = 'https://apps.apple.com/us/app/proxi-make-real-connections/id6807587839';
+  // The alphabet my_friend_invite_token() draws from (0054): no 0, O, 1, I or L.
+  const TOKEN = /^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{10}$/;
 
-  // The alphabet generate_invite_code() uses (0001): no 0, O, 1, I or L.
-  const CODE = /^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{6}$/;
+  const raw = new URLSearchParams(window.location.search).get('i') || '';
+  const token = raw.trim().toUpperCase();
 
-  const raw = new URLSearchParams(window.location.search).get('code') || '';
-  const code = raw.trim().toUpperCase();
-
-  if (CODE.test(code)) {
+  if (TOKEN.test(token)) {
     document.getElementById('invite').hidden = false;
-    document.getElementById('code').textContent = code;
-    document.getElementById('open').href = 'proxi://join/' + code;
-    if (APP_STORE_URL) document.getElementById('get').href = APP_STORE_URL;
-
-    const copy = document.getElementById('copy');
-    copy.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(code);
-        copy.textContent = 'Copied';
-      } catch (e) {
-        copy.textContent = 'Press and hold the code to copy';
-      }
-    });
+    document.getElementById('open').href = 'proxi://add/' + token;
   } else {
     document.getElementById('missing').hidden = false;
   }
