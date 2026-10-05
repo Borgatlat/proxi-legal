@@ -12,6 +12,17 @@
 <meta property="og:image" content="https://borgatlat.github.io/proxi-legal/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="apple-itunes-app" content="app-id=6807587839">
+<script>
+  // Safari's App Store banner: when ProxI is installed its "Open" button
+  // passes app-argument to the app, so the invite comes along. Set before
+  // the page finishes loading, and only for a token of the real shape.
+  (function () {
+    var t = (new URLSearchParams(location.search).get('i') || '').trim().toUpperCase();
+    if (/^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{10}$/.test(t)) {
+      document.querySelector('meta[name="apple-itunes-app"]').content = 'app-id=6807587839, app-argument=proxi://add/' + t;
+    }
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Manrope:wght@500;600;700;800&display=swap">

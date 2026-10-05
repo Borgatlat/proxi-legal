@@ -9,8 +9,20 @@
 <link rel="icon" type="image/png" href="icon.png">
 <meta property="og:title" content="You're invited to a group on ProxI">
 <meta property="og:description" content="Tap to join. You'll need the ProxI app on your iPhone.">
-<meta property="og:image" content="https://borgatlat.github.io/proxi-legal/icon.png">
+<meta property="og:image" content="https://borgatlat.github.io/proxi-legal/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="apple-itunes-app" content="app-id=6807587839">
+<script>
+  // Safari's App Store banner: when ProxI is installed its "Open" button
+  // passes app-argument to the app, so the group code comes along. Set
+  // before the page finishes loading, and only for a code of the real shape.
+  (function () {
+    var c = (new URLSearchParams(location.search).get('code') || '').trim().toUpperCase();
+    if (/^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{6}$/.test(c)) {
+      document.querySelector('meta[name="apple-itunes-app"]').content = 'app-id=6807587839, app-argument=proxi://join/' + c;
+    }
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Manrope:wght@500;600;700;800&display=swap">
