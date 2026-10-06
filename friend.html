@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Add a friend on ProxI</title>
+<meta name="description" content="Someone showed you their ProxI code in person.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="icon.png">
+<meta property="og:title" content="Add me on ProxI">
+<meta property="og:description" content="The app for actually hanging out with your friends. Free on the App Store.">
+<meta property="og:image" content="https://borgatlat.github.io/proxi-legal/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="apple-itunes-app" content="app-id=6807587839">
+<script>
+  // Safari's App Store banner: when ProxI is installed its "Open" button
+  // passes app-argument to the app, so the code comes along. Set before the
+  // page finishes loading, and only for a token of the real shape.
+  (function () {
+    var t = (new URLSearchParams(location.search).get('t') || '').trim();
+    if (/^[a-f0-9]{32,128}$/i.test(t)) {
+      document.querySelector('meta[name="apple-itunes-app"]').content = 'app-id=6807587839, app-argument=proxi://friend/' + t;
+    }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+/* The page the in-person QR opens (FriendCodeScreen): friend.html?t=TOKEN.
+   The QR used to be proxi://friend/TOKEN, which a phone without ProxI
+   can't open at all - and someone without ProxI is exactly who is standing
+   there being shown it. Now the camera opens this page, which hands the
+   token to the app or says where to get it.
+
+   Tokens last three minutes and are single use, so someone who has to
+   install first is told to ask for a fresh code rather than come back here.
+   The token is read from the address and only used if it has the exact
+   shape of a real one. It is never written into the page as HTML. */
+
+:root {
+  --green-dark: #1B4332;
+  --green-mid: #2D6A4F;
+  --green-light: #D6E4DB;
+  --honey-mid: #E3B23C;
+  --ink: #14241B;
+  --muted: #5E6A62;
+  --muted-light: #8A958E;
+  --bg: #EEF4EF;
+  --surface: #FFFFFF;
+  --hairline: rgba(20, 36, 27, .10);
+  --cta-bg: #1B4332;
+  --cta-text: #FFFFFF;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --green-mid: #7FC4A0;
+    --green-light: #1D3A2A;
+    --ink: #E8F0EA;
+    --muted: #A3B1A8;
+    --muted-light: #7D8C82;
+    --bg: #0E1F16;
+    --surface: #16311F;
+    --hairline: rgba(232, 240, 234, .12);
+    --cta-bg: #7FC4A0;
+    --cta-text: #0E1F16;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--muted);
+  font-family: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 48px;
+}
+main { width: 100%; max-width: 440px; text-align: center; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-family: "Fraunces", Georgia, serif; font-weight: 700; font-size: 22px; }
+.brand img { width: 34px; height: 34px; border-radius: 9px; }
+h1 { margin: 34px 0 10px; font-family: "Fraunces", Georgia, serif; font-weight: 700; color: var(--ink); font-size: clamp(30px, 8vw, 38px); line-height: 1.1; text-wrap: balance; }
+.lede { margin: 0 auto 26px; max-width: 360px; font-size: 16.5px; }
+.code-card { background: var(--surface); border-radius: 24px; padding: 22px; box-shadow: inset 0 0 0 1px var(--hairline); margin-bottom: 20px; }
+.code-label { font-size: 11px; font-weight: 700; letter-spacing: .14em; color: var(--muted-light); }
+.code { margin-top: 8px; font-family: "Fraunces", Georgia, serif; font-weight: 700; font-size: 40px; letter-spacing: .18em; color: var(--green-mid); }
+.copy { margin-top: 12px; border: 0; background: var(--green-light); color: var(--green-mid); font: inherit; font-weight: 700; font-size: 13.5px; padding: 8px 16px; border-radius: 999px; cursor: pointer; }
+.cta { display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px 22px; border-radius: 999px; background: var(--cta-bg); color: var(--cta-text); font-weight: 800; font-size: 16px; text-decoration: none; margin-bottom: 12px; }
+.ghost { display: flex; align-items: center; justify-content: center; width: 100%; padding: 15px 22px; border-radius: 999px; background: var(--surface); color: var(--ink); font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: inset 0 0 0 1px var(--hairline); }
+.steps { margin: 28px 0 0; padding: 0; list-style: none; text-align: left; display: grid; gap: 12px; }
+.steps li { display: flex; gap: 12px; font-size: 15px; }
+.steps b { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--green-light); color: var(--green-mid); font-size: 13px; }
+.steps strong { color: var(--ink); }
+.bad { background: var(--surface); border-radius: 24px; padding: 22px; box-shadow: inset 0 0 0 1px var(--hairline); }
+footer { margin-top: 34px; font-size: 13px; }
+footer a { color: var(--muted); margin: 0 8px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 3px; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <a class="brand" href="./"><img src="icon.png" alt="" width="34" height="34">ProxI</a>
+
+  <section id="invite" hidden>
+    <h1>Add them on ProxI</h1>
+    <p class="lede">They showed you their code. Tap below and ProxI asks them to be friends. It's for actually hanging out with the people you know.</p>
+
+    <a class="cta" id="open" href="#">Add them in ProxI</a>
+    <a class="ghost" id="get" href="https://apps.apple.com/us/app/proxi-make-real-connections/id6807587839">Don't have ProxI yet? Get it free</a>
+
+    <ol class="steps">
+      <li><b>1</b><span><strong>Get ProxI</strong> on your iPhone and create your account.</span></li>
+      <li><b>2</b><span>Codes only last a few minutes, so ask them to show <strong>a new code</strong> and scan it again.</span></li>
+    </ol>
+  </section>
+
+  <section id="missing" hidden>
+    <h1>This code isn't complete</h1>
+    <div class="bad">
+      <p>Ask them to show their code again, from <strong>Add someone</strong> in ProxI, and scan it with your camera.</p>
+    </div>
+    <p style="margin-top:20px"><a class="ghost" href="./">What is ProxI?</a></p>
+  </section>
+
+  <footer>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="support.html">Support</a>
+  </footer>
+</main>
+
+<script>
+  // The token redeem_friend_handshake() accepts: opaque hex.
+  const TOKEN = /^[a-f0-9]{32,128}$/i;
+
+  const token = (new URLSearchParams(window.location.search).get('t') || '').trim();
+
+  if (TOKEN.test(token)) {
+    document.getElementById('invite').hidden = false;
+    document.getElementById('open').href = 'proxi://friend/' + token;
+  } else {
+    document.getElementById('missing').hidden = false;
+  }
+</script>
+</body>
+</html>

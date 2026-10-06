@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="icon.png">
 <meta property="og:title" content="You're invited to a group on ProxI">
-<meta property="og:description" content="Tap to join. You'll need the ProxI app on your iPhone.">
+<meta property="og:description" content="Tap to join your friends on ProxI. Free on iPhone.">
 <meta property="og:image" content="https://borgatlat.github.io/proxi-legal/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="apple-itunes-app" content="app-id=6807587839">
@@ -33,7 +33,9 @@
    opens the group in the app, or shows the code and where to get the app.
 
    The code is read from the address and only ever shown if it has the exact
-   shape of a real one, and it is written as text, never as HTML. */
+   shape of a real one, and it is written as text, never as HTML. So is the
+   group's name (`n`, added by the app since 1.1), which only changes the
+   heading and is left out if it is missing. */
 
 :root {
   --green-dark: #1B4332;
@@ -92,6 +94,7 @@ h1 { margin: 34px 0 10px; font-family: "Fraunces", Georgia, serif; font-weight: 
 .steps li { display: flex; gap: 12px; font-size: 15px; }
 .steps b { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--green-light); color: var(--green-mid); font-size: 13px; }
 .steps strong { color: var(--ink); }
+h1 .name { color: var(--green-mid); }
 .bad { background: var(--surface); border-radius: 24px; padding: 22px; box-shadow: inset 0 0 0 1px var(--hairline); }
 footer { margin-top: 34px; font-size: 13px; }
 footer a { color: var(--muted); margin: 0 8px; }
@@ -104,8 +107,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--green-mid); out
   <a class="brand" href="./"><img src="icon.png" alt="" width="34" height="34">ProxI</a>
 
   <section id="invite" hidden>
-    <h1>You're invited to a group</h1>
-    <p class="lede">A friend wants you in their group on ProxI, where you keep each other going and actually meet up.</p>
+    <h1 id="title">You're invited to a group</h1>
+    <p class="lede">Your friends made a group on ProxI to plan things and actually hang out. Join them in a tap.</p>
 
     <div class="code-card">
       <div class="code-label">INVITE CODE</div>
@@ -118,7 +121,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--green-mid); out
 
     <ol class="steps">
       <li><b>1</b><span><strong>Get ProxI</strong> on your iPhone and create your account.</span></li>
-      <li><b>2</b><span>Come back here and tap <strong>Open in ProxI</strong>, or tap <strong>Join with a code</strong> in the app and enter the code above.</span></li>
+      <li><b>2</b><span>Right after you sign up, ProxI asks if a friend invited you. <strong>Enter the code above</strong>, or come back here and tap <strong>Open in ProxI</strong>.</span></li>
     </ol>
   </section>
 
@@ -150,6 +153,19 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--green-mid); out
   if (CODE.test(code)) {
     document.getElementById('invite').hidden = false;
     document.getElementById('code').textContent = code;
+
+    // The group's name, if the link carries one: plain text, trimmed, and
+    // capped like the app caps it, with control characters dropped.
+    const name = (new URLSearchParams(window.location.search).get('n') || '')
+      .replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 40).trim();
+    if (name) {
+      const title = document.getElementById('title');
+      const em = document.createElement('span');
+      em.className = 'name';
+      em.textContent = name;
+      title.replaceChildren('Join ', em, ' on ProxI');
+      document.title = 'Join ' + name + ' on ProxI';
+    }
     document.getElementById('open').href = 'proxi://join/' + code;
     if (APP_STORE_URL) document.getElementById('get').href = APP_STORE_URL;
 
